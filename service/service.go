@@ -1,8 +1,12 @@
 package service
 
 import (
+	"encoding/base64"
+	"github.com/CarrotVegeta/showstart/request"
+	"github.com/CarrotVegeta/showstart/utils"
+	"io/ioutil"
 	"log"
-	"showstart/request"
+	"strings"
 )
 
 func GetActivityDetail() map[string]interface{} {
@@ -20,14 +24,27 @@ func GetActivityDetail() map[string]interface{} {
 }
 func Order() map[string]interface{} {
 	m := make(map[string]interface{})
-	m["data"] = "XZ7oPYA9M5X1aWyQIUsydlM/KogoVPC2F4hclDEl6yOjnnt/0yiEBEHnRWpS722gqt9uGTC3xhuAeg359u0Xq1fwN3ucrSJbirA0lHXTPqKUYzLCPrbfv/2G9jRbVdefdoJskpBS4m4y5TYXDSQnXC1OsCrFSpaD1Ci9Gkue4nqKOttt+vEYSdERj+RlQPD9BPKx4er+Mq0fD9SOxQZvVGuk5izRA+1JXqgee0x1nJIp3W84qiBxI/AeBJWtaTApPBYw0EF+eRyGBaFaCvvyZYjE2vrn623EAgeUbHj+c0LUUUSlIRBFusgUuSXHZiFbiy8kSGiqlFiZknKgNucBjvSl0fck9x4GM3DGSxhz5Syshy4RR4wKMnY87ZEI2lWm"
-	m["sign"] = "3307ed926bd720dac578cdaf1566c14f"
-	m["appid"] = "wap"
-	m["terminal"] = "wap"
-	m["version"] = "997"
-	m, err := request.HttpDo(request.Order, "4ea93e5909142dc64f673ed009134cbb", m)
+	f, err := ioutil.ReadFile("./123.json")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	return m
+	s := string(f)
+	s = strings.ReplaceAll(s, "\n", "")
+	s = strings.ReplaceAll(s, " ", "")
+	b := `0RGF99CtUajPF0Ny`
+	c, err := utils.AesECBEncrypt([]byte(s), []byte(b))
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	d := base64.StdEncoding.EncodeToString(c)
+	m["data"] = d
+	m["sign"] = utils.GeneMD5(s)
+	m["appid"] = "wap"
+	m["terminal"] = "wap"
+	m["version"] = "997"
+	e, err := request.HttpDo(request.Order, "4ea93e5909142dc64f673ed009134cbb", m)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	return e
 }

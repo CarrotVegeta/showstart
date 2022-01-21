@@ -25,7 +25,7 @@ func HttpDo(url, CUUSERREF string, param map[string]interface{}) (map[string]int
 	req.Header.Set("HOST", "wap.showstart.com")
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("CUUSERREF", CUUSERREF)
-	req.Header.Set("CUSUT", "991022effe9469c62beb5a3161712899")
+	req.Header.Set("CUSUT", "611344d559eebc9fd940dee43e778f4c")
 	resp, err := client.Do(req)
 
 	defer resp.Body.Close()

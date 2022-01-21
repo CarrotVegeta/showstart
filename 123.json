@@ -1,0 +1,39 @@
+{
+  "action": "/order/order",
+  "method": "POST",
+  "query": {
+    "orderDetails": [
+      {
+        "goodsType": 1,
+        "skuType": 1,
+        "num": "1",
+        "goodsId": 169641,
+        "skuId": "16724ccc8e49e61a4740a99cb700149f",
+        "price": 140
+      }
+    ],
+    "commonPerfomerIds": [],
+    "areaCode": "86_CN",
+    "telephone": "45896375889",
+    "customerName": "",
+    "provinceName": "",
+    "cityName": "",
+    "address": "",
+    "teamId": "",
+    "couponId": "",
+    "checkCode": "",
+    "source": 0,
+    "discount": 0,
+    "sessionId": 3008317,
+    "freight": 0,
+    "amountPayable": "140.00",
+    "totalAmount": 140,
+    "partner": "",
+    "st_flpv": "Uri4jL8p8d4Ed1t55MI9",
+    "trackPath": "",
+    "terminal": "wap"
+  },
+  "body": null,
+  "qtime": 1642747535413,
+  "ranstr": "Q5QOF32q"
+}
