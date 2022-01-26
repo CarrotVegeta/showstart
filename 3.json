@@ -1,0 +1,15 @@
+{
+  "action": "/wap/activity/details",
+  "method": "POST",
+  "query": {
+    "activityId": "170309",
+    "coupon": "",
+    "st_flpv": "Uri4jL8p8d4Ed1t55MI9",
+    "sign": "ed20bb293ff6a81b47fd731332be4ab8",
+    "trackPath": "",
+    "terminal": "wap"
+  },
+  "body": null,
+  "qtime": 1643190137354,
+  "ranstr": "XVlBzgba"
+}

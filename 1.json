@@ -1,0 +1,15 @@
+{
+  "action": "/wap/activity/V2/ticket/list",
+  "method": "POST",
+  "query": {
+    "activityId": "169641",
+    "coupon": "",
+    "st_flpv": "h65wc6MHUxeCzdnd4R5T",
+    "sign": "c34ea0fbe6e2187cf1320b5f69b44f18",
+    "trackPath": "",
+    "terminal": "wap"
+  },
+  "body": null,
+  "qtime": 1642579486301,
+  "ranstr": "j8RqdBhP"
+}

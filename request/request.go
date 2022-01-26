@@ -2,20 +2,15 @@ package request
 
 import (
 	"bufio"
+	"github.com/CarrotVegeta/showstart/pkg"
 	jsoniter "github.com/json-iterator/go"
 	"io/ioutil"
 	"net/http"
 	"strings"
 )
 
-const BaseUrl = "https://wap.showstart.com/api"
-
-const ActivityDetail = "/hw/000I8900ggre"
-const GetListOfPerformers = "/hw/00000000ggre" //获取观演人列表
-const Order = "/appnj/02cCBf00ggre"
-
-func HttpDo(url, CUUSERREF string, param map[string]interface{}) (map[string]interface{}, error) {
-	url = BaseUrl + url
+func HttpDo(url string, param interface{}) (map[string]interface{}, error) {
+	url = pkg.BaseUrl + url
 	client := &http.Client{}
 	bs, _ := jsoniter.Marshal(param)
 	read := strings.NewReader(string(bs))
@@ -23,10 +18,10 @@ func HttpDo(url, CUUSERREF string, param map[string]interface{}) (map[string]int
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("HOST", "wap.showstart.com")
+	req.Header.Set("HOST", pkg.HOST)
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("CUUSERREF", CUUSERREF)
-	req.Header.Set("CUSUT", "611344d559eebc9fd940dee43e778f4c")
+	req.Header.Set("CUUSERREF", pkg.CUUSEREF)
+	req.Header.Set("CUSUT", pkg.CUSUT)
 	resp, err := client.Do(req)
 
 	defer resp.Body.Close()

@@ -1,14 +1,14 @@
 package main
 
-import (
-	"fmt"
-	"github.com/CarrotVegeta/showstart/service"
-)
-
 func main() {
 	//m := service.GetActivityDetail()
 	//fmt.Println(m)
-	m := service.Order()
-	fmt.Println(m)
-
+	//ticker := time.NewTicker(3 * time.Millisecond)
+	//for {
+	//	select {
+	//	case <-ticker.C:
+	//		m := service.Order()
+	//		fmt.Println(m)
+	//	}
+	//}
 }
