@@ -7,14 +7,14 @@
         "goodsType": 1,
         "skuType": 1,
         "num": "1",
-        "goodsId": 170309,
-        "skuId": "414e24781ce4f3c1e8aab424e19909a8",
-        "price": 588
+        "goodsId": 170092,
+        "skuId": "8489e0b7e2e62ac7c4119a05a741e55e", //ticketId
+        "price": 180 //价格
       }
     ],
     "commonPerfomerIds": [],
     "areaCode": "86_CN",
-    "telephone": "13118115155",
+    "telephone": "15448448522",
     "customerName": "",
     "provinceName": "",
     "cityName": "",
@@ -24,16 +24,17 @@
     "checkCode": "",
     "source": 0,
     "discount": 0,
-    "sessionId": 3010537,
+    "sessionId": 3009751, //sessionId
     "freight": 0,
-    "amountPayable": "588.00",
-    "totalAmount": 588,
+    "amountPayable": "180.00",
+    "totalAmount": 180,
     "partner": "",
     "st_flpv": "Uri4jL8p8d4Ed1t55MI9",
+    "sign": "611344d559eebc9fd940dee43e778f4c",
     "trackPath": "",
     "terminal": "wap"
   },
   "body": null,
-  "qtime": 1643173201000,
-  "ranstr": "Q5QOF32W"
+  "qtime": 1643172614451,
+  "ranstr": "rRaSx6z1"
 }

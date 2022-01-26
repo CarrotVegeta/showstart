@@ -11,6 +11,7 @@ import (
 const BaseUrl = "https://wap.showstart.com/api"
 
 const ActivityDetail = "/hw/000I8900ggre"
+const GetListOfPerformers = "/hw/00000000ggre" //获取观演人列表
 const Order = "/appnj/02cCBf00ggre"
 
 func HttpDo(url, CUUSERREF string, param map[string]interface{}) (map[string]interface{}, error) {
