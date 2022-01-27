@@ -39,24 +39,51 @@ type OrderDetails struct {
 	Price     int    `json:"price"`
 }
 type GetActivityDetails struct {
-	Action string `json:"action"`
-	Method string `json:"method"`
-	Query  struct {
-		ActivityId string `json:"activityId"`
-		Coupon     string `json:"coupon"`
-		StFlpv     string `json:"st_flpv"`
-		Sign       string `json:"sign"`
-		TrackPath  string `json:"trackPath"`
-		Terminal   string `json:"terminal"`
-	} `json:"query"`
+	ActivityId string `json:"activityId"`
+	Coupon     string `json:"coupon"`
+	StFlpv     string `json:"st_flpv"`
+	Sign       string `json:"sign"`
+	TrackPath  string `json:"trackPath"`
+	Terminal   string `json:"terminal"`
+}
+type Param struct {
+	Action string      `json:"action"`
+	Method string      `json:"method"`
+	Query  interface{} `json:"query"`
 	Body   interface{} `json:"body"`
 	Qtime  int64       `json:"qtime"`
 	Ranstr string      `json:"ranstr"`
 }
 type BodyParam struct {
-	Data     string
-	Sign     string
-	Appid    string
-	Terminal string
-	Version  string
+	Data     string `json:"data"`
+	Sign     string `json:"sign"`
+	Appid    string `json:"appid"`
+	Terminal string `json:"terminal"`
+	Version  string `json:"version"`
+}
+type TicketParam struct {
+	ActivityId string `json:"activityId"`
+	Coupon     string `json:"coupon"`
+	StFlpv     string `json:"st_flpv"`
+	Sign       string `json:"sign"`
+	TrackPath  string `json:"trackPath"`
+	Terminal   string `json:"terminal"`
+}
+type RequestSearch struct {
+	PageNo      int    `json:"pageNo"`
+	CityCode    string `json:"cityCode"`
+	Keyword     string `json:"keyword"`
+	Style       string `json:"style"`
+	ActivityIds string `json:"activityIds"`
+	CouponCode  string `json:"couponCode"`
+	PerformerId string `json:"performerId"`
+	HosterId    string `json:"hosterId"`
+	SiteId      string `json:"siteId"`
+	Tag         string `json:"tag"`
+	TourId      string `json:"tourId"`
+	ThemeId     string `json:"themeId"`
+	StFlpv      string `json:"st_flpv"`
+	Sign        string `json:"sign"`
+	TrackPath   string `json:"trackPath"`
+	Terminal    string `json:"terminal"`
 }

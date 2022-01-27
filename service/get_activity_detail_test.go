@@ -2,10 +2,14 @@ package service
 
 import (
 	"fmt"
+	"github.com/CarrotVegeta/showstart/config"
 	"testing"
 )
 
 func TestGetActivityDetail(t *testing.T) {
-	res := GetActivityDetail("170309", "Uri4jL8p8d4Ed1t55MI9")
-	fmt.Println(res)
+	config.Init()
+	res := GetActivityDetail("170309")
+	result := res["result"].(map[string]interface{})
+	activityID := result["activityId"]
+	fmt.Println(activityID)
 }
