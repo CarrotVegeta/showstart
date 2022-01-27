@@ -1,11 +1,12 @@
 package service
 
 import (
+	"github.com/CarrotVegeta/showstart/config"
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/CarrotVegeta/showstart/pkg"
 )
 
-func Search(keyword, stFlpv string, pageNo int) map[string]interface{} {
+func Search(keyword string, pageNo int) map[string]interface{} {
 	s := &models.RequestSearch{
 		PageNo:      pageNo,
 		CityCode:    "28",
@@ -19,7 +20,7 @@ func Search(keyword, stFlpv string, pageNo int) map[string]interface{} {
 		Tag:         "",
 		TourId:      "",
 		ThemeId:     "",
-		StFlpv:      stFlpv,
+		StFlpv:      config.Conf.StFlpv,
 		Sign:        "",
 		TrackPath:   "",
 		Terminal:    pkg.Terminal,

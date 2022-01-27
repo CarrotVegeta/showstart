@@ -9,6 +9,4 @@ func TestGetTicketList(t *testing.T) {
 	m := GetTicketList("170309")
 	result := m["result"].(interface{})
 	fmt.Println(result)
-	//ticketList := result["ticketList"].([]interface{})
-	//fmt.Println(ticketList)
 }

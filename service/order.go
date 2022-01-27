@@ -2,7 +2,6 @@ package service
 
 import (
 	"encoding/base64"
-	"fmt"
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/CarrotVegeta/showstart/pkg"
 	"github.com/CarrotVegeta/showstart/request"
@@ -12,29 +11,50 @@ import (
 	"time"
 )
 
-func Order(oc *OrderConfig) map[string]interface{} {
+type OrderConfig struct {
+	GoodsType         int
+	SkuType           int
+	Num               string
+	GoodsId           int    //activityID
+	SkuId             string //ticketID
+	Price             string //价格
+	CommonPerformerID int    //观演人ID
+	TelePhone         string //联系电话
+	SessionId         int
+	StFlpv            string
+}
+type PersonAddress struct {
+	Telephone    string //电话
+	CustomerName string //姓名
+	ProvinceName string //省份
+	CityName     string //城市
+	Address      string //详细地址
+
+}
+
+func Order(oc *OrderConfig, pa *PersonAddress) map[string]interface{} {
 	geo := &models.GenerateOrder{}
 	geo.Action = pkg.OrderAction
 	geo.Method = "POST"
 	od := &models.OrderDetails{
-		GoodsType: 1,
-		SkuType:   2,
-		Num:       "1",
+		GoodsType: oc.GoodsType,
+		SkuType:   oc.SkuType,
+		Num:       oc.Num,
 		GoodsId:   oc.GoodsId,
 		SkuId:     oc.SkuId,
-		Price:     oc.Price,
+		//Price:     oc.Price,
 	}
 	geo.Query.OrderDetails = append(geo.Query.OrderDetails, od)
 	geo.Query.CommonPerfomerIds = append(geo.Query.CommonPerfomerIds, oc.CommonPerformerID)
 	geo.Query.AreaCode = "86_CN"
-	geo.Query.Telephone = oc.TelePhone
-	geo.Query.CustomerName = "李川"
-	geo.Query.ProvinceName = "四川"
-	geo.Query.CityName = "成都"
-	geo.Query.Address = "双流区梓州大道恒大名都"
+	geo.Query.Telephone = pa.Telephone
+	geo.Query.CustomerName = pa.CustomerName
+	geo.Query.ProvinceName = pa.ProvinceName
+	geo.Query.CityName = pa.CityName
+	geo.Query.Address = pa.Address
 	geo.Query.SessionId = oc.SessionId
-	geo.Query.AmountPayable = fmt.Sprintf("%d.00", oc.Price)
-	geo.Query.TotalAmount = oc.Price
+	//geo.Query.AmountPayable = fmt.Sprintf("%d.00", oc.Price)
+	//geo.Query.TotalAmount = oc.Price
 	geo.Query.StFlpv = oc.StFlpv
 	geo.Query.Terminal = pkg.Terminal
 	geo.Qtime = time.Now().UnixNano() / 1e6
@@ -46,7 +66,7 @@ func Order(oc *OrderConfig) map[string]interface{} {
 	}
 	d := base64.StdEncoding.EncodeToString(c)
 	bp := GetBodyParam(d, string(bs))
-	e, err := request.HttpDo(pkg.Order2, bp)
+	e, err := request.HttpDo(pkg.GetOrderUrl(oc.SkuType), bp)
 	if err != nil {
 		log.Fatal(err.Error())
 	}

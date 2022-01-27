@@ -36,7 +36,7 @@ type OrderDetails struct {
 	Num       string `json:"num"`
 	GoodsId   int    `json:"goodsId"`
 	SkuId     string `json:"skuId"`
-	Price     int    `json:"price"`
+	//Price     string    `json:"price"`
 }
 type GetActivityDetails struct {
 	ActivityId string `json:"activityId"`
@@ -86,4 +86,10 @@ type RequestSearch struct {
 	Sign        string `json:"sign"`
 	TrackPath   string `json:"trackPath"`
 	Terminal    string `json:"terminal"`
+}
+type RequestSpectator struct {
+	StFlpv    string `json:"st_flpv"`
+	Sign      string `json:"sign"`
+	TrackPath string `json:"trackPath"`
+	Terminal  string `json:"terminal"`
 }

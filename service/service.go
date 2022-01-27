@@ -34,16 +34,6 @@ func RequestWithBodyParam(action, url string, method string, query interface{}) 
 	return rm
 }
 
-type OrderConfig struct {
-	GoodsId           int    //activityID
-	SkuId             string //ticketID
-	Price             int    //价格
-	CommonPerformerID int    //观演人ID
-	TelePhone         string //联系电话
-	SessionId         int
-	StFlpv            string
-}
-
 func GetBodyParam(d, s string) *models.BodyParam {
 	bp := &models.BodyParam{
 		Data:     d,

@@ -1,8 +1,7 @@
 package main
 
-import "github.com/CarrotVegeta/showstart/config"
+import "github.com/CarrotVegeta/showstart/engine"
 
 func main() {
-	config.Init()
-
+	engine.NewEngine()
 }

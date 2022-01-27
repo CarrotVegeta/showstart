@@ -14,5 +14,5 @@ func GetTicketList(activityId string) map[string]interface{} {
 		TrackPath:  "",
 		Terminal:   pkg.Terminal,
 	}
-	return RequestWithBodyParam(pkg.GetTicketListAction, "POST", pkg.Detail, t)
+	return RequestWithBodyParam(pkg.GetTicketListAction, pkg.Detail, "POST", t)
 }

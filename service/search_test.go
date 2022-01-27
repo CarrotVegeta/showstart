@@ -6,7 +6,7 @@ import (
 )
 
 func TestSearch(t *testing.T) {
-	res := Search("元气森林", "Uri4jL8p8d4Ed1t55MI9", 1)
+	res := Search("元气森林", 1)
 	fmt.Println(res)
 	result := res["result"].(map[string]interface{})
 	activityInfo := result["activityInfo"].([]interface{})

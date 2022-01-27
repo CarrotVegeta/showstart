@@ -6,6 +6,7 @@ import (
 	"github.com/CarrotVegeta/showstart/pkg"
 	jsoniter "github.com/json-iterator/go"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"strings"
 )
@@ -33,5 +34,8 @@ func HttpDo(url string, param interface{}) (map[string]interface{}, error) {
 	}
 	m := make(map[string]interface{})
 	jsoniter.Unmarshal(body, &m)
+	if (int)(m["status"].(float64)) != 200 {
+		log.Fatal(m)
+	}
 	return m, nil
 }

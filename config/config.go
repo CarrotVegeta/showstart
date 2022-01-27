@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"log"
@@ -15,8 +14,8 @@ type Config struct {
 
 var Conf Config
 
-func Init() {
-	f, err := ioutil.ReadFile("../config/config.yaml")
+func Init(path string) {
+	f, err := ioutil.ReadFile(path)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -28,5 +27,4 @@ func Init() {
 		log.Fatalf("yaml 解析错误:%v", err)
 	}
 	Conf = s.ShowStart
-	fmt.Println(Conf)
 }

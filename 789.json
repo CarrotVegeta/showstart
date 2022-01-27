@@ -1,25 +1,13 @@
 {
-  "action": "/wap/activity/list",
-  "method": "GET",
+  "action": "/wap/cp/list",
+  "method": "POST",
   "query": {
-    "pageNo": 1,
-    "cityCode": "28",
-    "keyword": "元气森林",
-    "style": "",
-    "activityIds": "",
-    "couponCode": "",
-    "performerId": "",
-    "hosterId": "",
-    "siteId": "",
-    "tag": "",
-    "tourId": "",
-    "themeId": "",
-    "st_flpv": "Uri4jL8p8d4Ed1t55MI9",
-    "sign": "611344d559eebc9fd940dee43e778f4c",
+    "st_flpv": "4u2mk6jWoe6C11eLJuvk",
+    "sign": "f37f09217e133d20f99b8a0918ac4fbf",
     "trackPath": "",
     "terminal": "wap"
   },
   "body": null,
-  "qtime": 1643264569231,
-  "ranstr": "5EputP3C"
+  "qtime": 1643276172129,
+  "ranstr": "o2XVm7XG"
 }
