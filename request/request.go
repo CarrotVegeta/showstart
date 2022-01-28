@@ -34,7 +34,7 @@ func HttpDo(url string, param interface{}) (map[string]interface{}, error) {
 	}
 	m := make(map[string]interface{})
 	jsoniter.Unmarshal(body, &m)
-	if (int)(m["status"].(float64)) != 200 {
+	if _, ok := m["status"]; !ok {
 		log.Fatal(m)
 	}
 	return m, nil

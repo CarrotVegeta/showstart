@@ -3,3 +3,19 @@ showstart:
   CUUSEREF: 961007ea504e70a7e5a902c5be803c3d
   StFlpv: 4u2mk6jWoe6C11eLJuvk
   CUSUT: f37f09217e133d20f99b8a0918ac4fbf
+  #用户信息
+  ## 收货地址
+  CustomerName: 收货姓名
+  Province: 省份
+  CityName: 城市
+  Address: 详细地址
+  Telephone: 13118115155
+  #如需观演人
+  CommonPerformerID: 1225930
+  #搜索演出关键字
+  Keyword: 元气
+  #分页展示 页数
+  Pagno: 1
+  #演出相关信息
+  ActivityId: 170313
+  TicketId: 9409553d48b7773abfb2fac26940639c

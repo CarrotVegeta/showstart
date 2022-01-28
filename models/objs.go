@@ -36,7 +36,7 @@ type OrderDetails struct {
 	Num       string `json:"num"`
 	GoodsId   int    `json:"goodsId"`
 	SkuId     string `json:"skuId"`
-	//Price     string    `json:"price"`
+	Price     int    `json:"price"`
 }
 type GetActivityDetails struct {
 	ActivityId string `json:"activityId"`

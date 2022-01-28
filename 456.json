@@ -5,36 +5,37 @@
     "orderDetails": [
       {
         "goodsType": 1,
-        "skuType": 1,
+        "skuType": 3,
         "num": "1",
         "goodsId": 170092,
-        "skuId": "8489e0b7e2e62ac7c4119a05a741e55e", //ticketId
-        "price": 180 //价格
+        "skuId": "8489e0b7e2e62ac7c4119a05a741e55e",
+        "price": 200
       }
     ],
-    "commonPerfomerIds": [],
+    "commonPerfomerIds": [
+      1225930
+    ],
     "areaCode": "86_CN",
-    "telephone": "15448448522",
-    "customerName": "",
-    "provinceName": "",
-    "cityName": "",
-    "address": "",
+    "telephone": "13118115155",
+    "customerName": "收货姓名",
+    "provinceName": "四川省",
+    "cityName": "成都",
+    "address": "详细地址",
     "teamId": "",
     "couponId": "",
     "checkCode": "",
     "source": 0,
     "discount": 0,
-    "sessionId": 3009751, //sessionId
+    "sessionId": 3009751,
     "freight": 0,
-    "amountPayable": "180.00",
-    "totalAmount": 180,
+    "amountPayable": "200.00",
+    "totalAmount": 200,
     "partner": "",
-    "st_flpv": "Uri4jL8p8d4Ed1t55MI9",
-    "sign": "611344d559eebc9fd940dee43e778f4c",
+    "st_flpv": "4u2mk6jWoe6C11eLJuvk",
     "trackPath": "",
     "terminal": "wap"
   },
   "body": null,
-  "qtime": 1643172614451,
-  "ranstr": "rRaSx6z1"
+  "qtime": 1643357933755,
+  "ranstr": "iCMRAjWw"
 }

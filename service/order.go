@@ -2,12 +2,14 @@ package service
 
 import (
 	"encoding/base64"
+	"fmt"
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/CarrotVegeta/showstart/pkg"
 	"github.com/CarrotVegeta/showstart/request"
 	"github.com/CarrotVegeta/showstart/utils"
 	jsoniter "github.com/json-iterator/go"
 	"log"
+	"strconv"
 	"time"
 )
 
@@ -36,13 +38,14 @@ func Order(oc *OrderConfig, pa *PersonAddress) map[string]interface{} {
 	geo := &models.GenerateOrder{}
 	geo.Action = pkg.OrderAction
 	geo.Method = "POST"
+	price, _ := strconv.ParseFloat(oc.Price, 64)
 	od := &models.OrderDetails{
 		GoodsType: oc.GoodsType,
 		SkuType:   oc.SkuType,
 		Num:       oc.Num,
 		GoodsId:   oc.GoodsId,
 		SkuId:     oc.SkuId,
-		//Price:     oc.Price,
+		Price:     (int)(price),
 	}
 	geo.Query.OrderDetails = append(geo.Query.OrderDetails, od)
 	geo.Query.CommonPerfomerIds = append(geo.Query.CommonPerfomerIds, oc.CommonPerformerID)
@@ -53,8 +56,8 @@ func Order(oc *OrderConfig, pa *PersonAddress) map[string]interface{} {
 	geo.Query.CityName = pa.CityName
 	geo.Query.Address = pa.Address
 	geo.Query.SessionId = oc.SessionId
-	//geo.Query.AmountPayable = fmt.Sprintf("%d.00", oc.Price)
-	//geo.Query.TotalAmount = oc.Price
+	geo.Query.AmountPayable = fmt.Sprintf("%.2f", price)
+	geo.Query.TotalAmount = (int)(price)
 	geo.Query.StFlpv = oc.StFlpv
 	geo.Query.Terminal = pkg.Terminal
 	geo.Qtime = time.Now().UnixNano() / 1e6

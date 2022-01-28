@@ -7,9 +7,19 @@ import (
 )
 
 type Config struct {
-	CUUSEREF string `yaml:"CUUSEREF"`
-	StFlpv   string `yaml:"StFlpv"`
-	CUSUT    string `yaml:"CUSUT"`
+	CUUSEREF          string `yaml:"CUUSEREF"`
+	StFlpv            string `yaml:"StFlpv"`
+	CUSUT             string `yaml:"CUSUT"`
+	CustomerName      string `yaml:"CustomerName"`
+	Province          string `yaml:"Province"`
+	CityName          string `yaml:"CityName"`
+	Address           string `yaml:"Address"`
+	CommonPerformerID int    `yaml:"CommonPerformerID"`
+	Keyword           string `yaml:"Keyword"`
+	Pagno             int    `yaml:"Pagno"`
+	ActivityId        int    `yaml:"ActivityId"`
+	TicketId          string `yaml:"TicketId"`
+	Telephone         string `yaml:"Telephone"`
 }
 
 var Conf Config

@@ -27,7 +27,7 @@ func TestEncryptDecrypt(t *testing.T) {
 	fmt.Println(string(e))
 }
 func TestAesECBDecrypt(t *testing.T) {
-	a := `RdKnoWKXGxZP0zYw1ohcYtCFoaCEsWtat9s7r3I+rGjhyUvDOz50wTm3lqMTrx8S2Ji/9FMP0KemgwSCAntcJDZbJ/HDLrM76vxbGF8LU29q1o8A0EcpvAtkeP5PZgwoFQbzVQx8/UNcxXEiIIiSwAVL61zM7Wemu7wBr98HZoWi/1MzhnPkSy0dieu3eWI+I8duMQ5OewR5B4+4ReY0gKOVTWzS+ucw9PMdA++GMNP3WhSvv5Riu5zP342ijCtmN+dUMtOfc/waBH79fnMgOqMMHBBZujRs5yZltcZ+5oE=`
+	a := `XZ7oPYA9M5X1aWyQIUsydkqPZVvd/2Md/F3AZz7o68PhyUvDOz50wTm3lqMTrx8S28qEvTwmvtgu59UWWax5tbabB2ugevjQJQ7V3h+ZF1nhPKEBawHCVdbzCGgF+s0Tp4BRw+g4ANN+gOpgPKPMn+4M07JcMS5urgfrWOYylFk3oaDIBRaQR6U48tGAM2e1pSQKx5nBUuMGQ86xJ7zsdLONF57WPxPjtNROD7UF0St3i75LM4ls8fQjyZQ2+rQpRvvCn2IrWBT3Yb3ddmpT2cmXKC2bqyrWK4nh5VFyvY+6ynQV6IArqNfrYlODAXENYhdHZYt0aywKOv1jmkpozwhVVCNGZhWb7dIU2pfvdrybTY7GXdY4NUQy720109ngA3lmuHEZWVq1VxV1z+d+SLA+1w1gNKydaDNfIUYkOgXO66t+SdgLCzc3X7Lr3RUVdRmx/1IITyHDeVr0bhlBC6phR48FUkCjmfWr9OGa4BD+hEsIImLzznWv7kxz0E/ckFczJCkRIA7MVE0+mvNePPkZ2YsI6o62JTRw+EyVxdS+w8HFvvoE085ALFFIlInTUhA1YryLy/wqei/u2mYqKfpB43Rq6DipiZWHDuPxYRyhyplP8U0Q7c29VRbTm9X2XB4Sy6jKaxf54+GeUOo470VcxwqhjbJ+htJ4hgCCC+N+X+8lerzgPT+C72oBHgI2AgCzxdD0vjgkGPnoCMyTz5Q4Y5NsGqSDRMip++lHdN5chjo4KLO1tvHVuQbKj6JZVgPzSi0Vp4wFmgp1+wVk4nIdSMK56/w1WLHktO9HYw+pb8hg+3jHqDyf4jLSx2La+NGO6QZ/MrwUXSRBUKxSmg==`
 	b := `0RGF99CtUajPF0Ny`
 	c, err := base64.StdEncoding.DecodeString(a)
 	if err != nil {
