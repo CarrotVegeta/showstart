@@ -41,11 +41,11 @@ func (t *Ticket) GetTicketList() *Ticket {
 			ticketList := v["ticketList"].([]interface{})
 			for _, tl := range ticketList {
 				tm := tl.(map[string]interface{})
-				msg := fmt.Sprintf("ticketType:%s ticketNum:%d ticketId:%s costPrice:%s showTime:%s",
+				msg := fmt.Sprintf("ticketType:%s ticketNum:%d ticketId:%s sellingPrice:%s showTime:%s",
 					tm["ticketType"].(string),
 					(int)(tm["ticketNum"].(float64)),
 					tm["ticketId"].(string),
-					tm["costPrice"].(string),
+					tm["sellingPrice"].(string),
 					tm["showTime"].(string))
 				fmt.Println(msg)
 				if tm["ticketId"].(string) == t.TicketId {

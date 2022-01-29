@@ -3,6 +3,7 @@ package engine
 import (
 	"flag"
 	"github.com/CarrotVegeta/showstart/config"
+	"log"
 )
 
 type Server struct {
@@ -17,6 +18,9 @@ func (s *Server) RegisterServer(e Engine) {
 }
 func (s *Server) Start() {
 	args := flag.Args()
+	if _, ok := s.ModM[args[0]]; !ok {
+		log.Fatal("不存在的模式")
+	}
 	s.ModM[args[0]].Request()
 }
 func NewEngine() *Server {

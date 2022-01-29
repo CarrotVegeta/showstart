@@ -5,6 +5,7 @@ import (
 	"github.com/CarrotVegeta/showstart/config"
 	"github.com/CarrotVegeta/showstart/engine"
 	"github.com/CarrotVegeta/showstart/service"
+	"time"
 )
 
 type Order struct {
@@ -44,12 +45,16 @@ func (o *Order) Request() {
 		CityName:     config.Conf.CityName,
 		Address:      config.Conf.Address,
 	}
-	//ticker := time.NewTicker(time.Second)
-	//for {
-	//	select {
-	//	case <-ticker.C:
-	res := service.Order(oc, pa)
-	fmt.Println(res)
-	//	}
-	//}
+	ticker := time.NewTicker(time.Second)
+	for {
+		select {
+		case <-ticker.C:
+			res := service.Order(oc, pa)
+			fmt.Println(res)
+			if res["success"].(bool) == true {
+				ticker.Stop()
+				return
+			}
+		}
+	}
 }
