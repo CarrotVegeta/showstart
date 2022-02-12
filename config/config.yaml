@@ -1,17 +1,17 @@
 showstart:
   #从header里面获取该字段
-  CUUSEREF: fc84fe840b09cbd65a5cc1930d6993ad
-  StFlpv: 498RPjmiiwD9w8fYIRL2
-  CUSUT: fc735e61aa21099e7f0515ab63fd2a19
+  CUUSEREF:
+  StFlpv:
+  CUSUT:
   #用户信息
   ## 收货地址
   CustomerName: 收货姓名
   Province: 省份
   CityName: 城市
   Address: 详细地址
-  Telephone: 13118115155
+  Telephone:
   #如需观演人
-  CommonPerformerID: 1225930
+  CommonPerformerID:
   #搜索演出关键字
   Keyword: 陈鸿宇
   #分页展示 页数
