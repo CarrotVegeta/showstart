@@ -20,6 +20,7 @@ type Config struct {
 	ActivityId        int    `yaml:"ActivityId"`
 	TicketId          string `yaml:"TicketId"`
 	Telephone         string `yaml:"Telephone"`
+	Ticker            int64  `yaml:"Ticker"`
 }
 
 var Conf Config

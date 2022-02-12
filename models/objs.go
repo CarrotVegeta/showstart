@@ -86,3 +86,10 @@ type RequestSpectator struct {
 	TrackPath string `json:"trackPath"`
 	Terminal  string `json:"terminal"`
 }
+type CoreOrderResult struct {
+	OrderJobKey string `json:"orderJobKey"`
+	StFlpv      string `json:"st_flpv"`
+	Sign        string `json:"sign"`
+	TrackPath   string `json:"trackPath"`
+	Terminal    string `json:"terminal"`
+}

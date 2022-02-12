@@ -1,39 +1,14 @@
 {
-  "action": "/order/order",
+  "action": "/order/getCoreOrderResult",
   "method": "POST",
   "query": {
-    "orderDetails": [
-      {
-        "goodsType": 1,
-        "skuType": 1,
-        "num": "1",
-        "goodsId": 170309,
-        "skuId": "414e24781ce4f3c1e8aab424e19909a8",
-        "price": 588
-      }
-    ],
-    "commonPerfomerIds": [],
-    "areaCode": "86_CN",
-    "telephone": "13118115155",
-    "customerName": "",
-    "provinceName": "",
-    "cityName": "",
-    "address": "",
-    "teamId": "",
-    "couponId": "",
-    "checkCode": "",
-    "source": 0,
-    "discount": 0,
-    "sessionId": 3010537,
-    "freight": 0,
-    "amountPayable": "588.00",
-    "totalAmount": 588,
-    "partner": "",
-    "st_flpv": "Uri4jL8p8d4Ed1t55MI9",
+    "orderJobKey": "ef2203a86ec0d52ed365a3b48bdc59bd",
+    "st_flpv": "498RPjmiiwD9w8fYIRL2",
+    "sign": "fc735e61aa21099e7f0515ab63fd2a19",
     "trackPath": "",
     "terminal": "wap"
   },
   "body": null,
-  "qtime": 1643173201000,
-  "ranstr": "Q5QOF32W"
+  "qtime": 1644668704772,
+  "ranstr": "wi0fpI65"
 }

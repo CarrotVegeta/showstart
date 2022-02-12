@@ -45,15 +45,27 @@ func (o *Order) Request() {
 		CityName:     config.Conf.CityName,
 		Address:      config.Conf.Address,
 	}
-	ticker := time.NewTicker(time.Second)
+	ticker := time.NewTicker(time.Millisecond * (time.Duration)(config.Conf.Ticker))
 	for {
 		select {
 		case <-ticker.C:
 			res := service.Order(oc, pa)
 			fmt.Println(res)
 			if res["success"].(bool) == true {
-				ticker.Stop()
-				return
+				fmt.Println("===========下单中》》》》》》》》》》》》》》》》》》》》")
+				result := res["result"].(map[string]interface{})
+				orderJobKey := result["orderJobKey"].(string)
+				res1 := service.GetCoreOrderResult(orderJobKey, oc.StFlpv)
+				if res1["success"].(bool) == true {
+					if _, ok := res1["result"]; ok {
+						result1 := res1["result"].(map[string]interface{})
+						if result1["orderId"].(string) != "" {
+							fmt.Println("===================抢票成功=================================")
+							ticker.Stop()
+							return
+						}
+					}
+				}
 			}
 		}
 	}
