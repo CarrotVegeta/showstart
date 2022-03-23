@@ -17,6 +17,13 @@ showstart:
   #分页展示 页数
   Pagno: 1
   #演出相关信息
-  ActivityId: 170911
-  TicketId: c295aad3034308cd1e2c851ab0e862bb
-  Ticker: 500
+  ActivityId: 172922
+  TicketId: 2b2643e8bdb78289cb768eb7fa6bef39
+  #一个订单抢几张票 默认1张
+  TicketNum: 1
+  #指定多少毫米内随机抢票
+  Ticker: 2000
+  #cron表达式 指定时间开始抢票
+  CronTime: 0 25 12 * * ?
+  #订单数
+  OrderNum: 1

@@ -5,6 +5,10 @@ import (
 	"github.com/CarrotVegeta/showstart/config"
 	"github.com/CarrotVegeta/showstart/engine"
 	"github.com/CarrotVegeta/showstart/service"
+	"github.com/robfig/cron"
+	"log"
+	"math/rand"
+	"reflect"
 	"time"
 )
 
@@ -16,6 +20,9 @@ type Order struct {
 
 const orderMod = "order"
 
+var num = 1
+var ch = make(chan bool)
+
 func (o *Order) Open(s *engine.Server) {
 	s.RegisterMod(o, orderMod)
 	o.ActivityID = config.Conf.ActivityId
@@ -26,10 +33,13 @@ func (o *Order) Request() {
 	t.ActivityId = o.ActivityID
 	t.TicketId = o.TicketID
 	t = t.GetTicketList()
+	if config.Conf.TicketNum > 0 {
+		num = config.Conf.TicketNum
+	}
 	oc := &service.OrderConfig{
 		GoodsType:         t.GoodType,
 		SkuType:           t.Type,
-		Num:               fmt.Sprintf("%d", t.MemberNum),
+		Num:               fmt.Sprintf("%d", num),
 		GoodsId:           t.ActivityId,
 		SkuId:             t.TicketId,
 		Price:             t.SellingPrice,
@@ -45,25 +55,53 @@ func (o *Order) Request() {
 		CityName:     config.Conf.CityName,
 		Address:      config.Conf.Address,
 	}
-	ticker := time.NewTicker(time.Millisecond * (time.Duration)(config.Conf.Ticker))
+	c := cron.New()
+	err := c.AddFunc(config.Conf.CronTime, func() {
+		log.Println("开始抢票========================》")
+		var flag bool
+		for {
+			if flag {
+				i := rand.Intn(int(config.Conf.Ticker))
+				time.Sleep(time.Millisecond * (time.Duration(i)))
+			}
+			flag = true
+			go o.GoOrder(oc, pa)
+		}
+	})
+	if err != nil {
+		log.Fatal(err.Error())
+		return
+	}
+	c.Start()
+	var j int
 	for {
 		select {
-		case <-ticker.C:
-			res := service.Order(oc, pa)
-			fmt.Println(res)
-			if res["success"].(bool) == true {
-				fmt.Println("===========下单中》》》》》》》》》》》》》》》》》》》》")
-				result := res["result"].(map[string]interface{})
-				orderJobKey := result["orderJobKey"].(string)
-				res1 := service.GetCoreOrderResult(orderJobKey, oc.StFlpv)
-				if res1["success"].(bool) == true {
-					if _, ok := res1["result"]; ok {
-						result1 := res1["result"].(map[string]interface{})
-						if result1["orderId"].(string) != "" {
-							fmt.Println("===================抢票成功=================================")
-							ticker.Stop()
-							return
-						}
+		case <-ch:
+			j++
+			log.Println(j)
+		}
+		if j == config.Conf.OrderNum {
+			break
+		}
+	}
+
+}
+func (o *Order) GoOrder(oc *service.OrderConfig, pa *service.PersonAddress) {
+	res := service.Order(oc, pa)
+	log.Println(res)
+	if res["success"].(bool) == true {
+		fmt.Println("===========下单中》》》》》》》》》》》》》》》》》》》》")
+		result := res["result"].(map[string]interface{})
+		orderJobKey := result["orderJobKey"].(string)
+		res1 := service.GetCoreOrderResult(orderJobKey, oc.StFlpv)
+		log.Println(res1)
+		if res1["success"].(bool) == true {
+			if _, ok := res1["result"]; ok {
+				if reflect.TypeOf(res1["result"]).Kind() == reflect.Map {
+					result1 := res1["result"].(map[string]interface{})
+					if result1["orderId"].(string) != "" {
+						fmt.Println("===================抢票成功=================================")
+						ch <- true
 					}
 				}
 			}

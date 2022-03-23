@@ -5,6 +5,7 @@ import (
 	"github.com/CarrotVegeta/showstart/config"
 	"github.com/CarrotVegeta/showstart/engine"
 	"github.com/CarrotVegeta/showstart/service"
+	"log"
 )
 
 type Ticket struct {
@@ -35,9 +36,9 @@ func (t *Ticket) GetTicketList() *Ticket {
 		for _, r := range result {
 			v := r.(map[string]interface{})
 			ssId := fmt.Sprintf("sessionId:%d", (int)(v["sessionId"].(float64)))
-			fmt.Println(ssId)
+			log.Println(ssId)
 			sessionName := fmt.Sprintf("sessionName:%s", v["sessionName"].(string))
-			fmt.Println(sessionName)
+			log.Println(sessionName)
 			ticketList := v["ticketList"].([]interface{})
 			for _, tl := range ticketList {
 				tm := tl.(map[string]interface{})
@@ -47,7 +48,7 @@ func (t *Ticket) GetTicketList() *Ticket {
 					tm["ticketId"].(string),
 					tm["sellingPrice"].(string),
 					tm["showTime"].(string))
-				fmt.Println(msg)
+				log.Println(msg)
 				if tm["ticketId"].(string) == t.TicketId {
 					return &Ticket{
 						SessionId:    (int)(v["sessionId"].(float64)),
