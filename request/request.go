@@ -25,7 +25,10 @@ func HttpDo(url string, param interface{}) (map[string]interface{}, error) {
 	req.Header.Set("CUUSERREF", config.Conf.CUUSEREF)
 	req.Header.Set("CUSUT", config.Conf.CUSUT)
 	resp, err := client.Do(req)
-
+	if err != nil {
+		log.Println(err.Error())
+		return nil, err
+	}
 	defer resp.Body.Close()
 
 	body, err := ioutil.ReadAll(resp.Body)

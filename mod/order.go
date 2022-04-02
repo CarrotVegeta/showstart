@@ -60,12 +60,15 @@ func (o *Order) Request() {
 		log.Println("开始抢票========================》")
 		var flag bool
 		for {
+			//if !flag {
+			//	time.Sleep(time.Millisecond * time.Duration(2000))
+			//}
 			if flag {
 				i := rand.Intn(int(config.Conf.Ticker))
 				time.Sleep(time.Millisecond * (time.Duration(i)))
 			}
 			flag = true
-			go o.GoOrder(oc, pa)
+			o.GoOrder(oc, pa)
 		}
 	})
 	if err != nil {
@@ -78,7 +81,6 @@ func (o *Order) Request() {
 		select {
 		case <-ch:
 			j++
-			log.Println(j)
 		}
 		if j == config.Conf.OrderNum {
 			break
