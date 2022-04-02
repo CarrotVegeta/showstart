@@ -13,5 +13,5 @@ func GetSpectatorList() map[string]interface{} {
 		TrackPath: "",
 		Terminal:  pkg.Terminal,
 	}
-	return RequestWithBodyParam(pkg.GetSpectatorAction, pkg.GetList, "POST", s)
+	return RequestWithBodyParam(pkg.GetSpectatorAction, pkg.B, "POST", s)
 }

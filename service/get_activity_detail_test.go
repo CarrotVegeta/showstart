@@ -6,7 +6,7 @@ import (
 )
 
 func TestGetActivityDetail(t *testing.T) {
-	res := GetActivityDetail("170309")
+	res := GetActivityDetail("173034")
 	result := res["result"].(map[string]interface{})
 	activityID := result["activityId"]
 	fmt.Println(activityID)

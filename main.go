@@ -12,5 +12,7 @@ func main() {
 	s.RegisterServer(&mod.Spectator{})
 	s.RegisterServer(&mod.Order{})
 	s.RegisterServer(&mod.Ticket{})
+	s.RegisterServer(&mod.TicketRemain{})
+	s.RegisterServer(&mod.User{})
 	s.Start()
 }

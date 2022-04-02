@@ -25,5 +25,5 @@ func Search(keyword string, pageNo int) map[string]interface{} {
 		TrackPath:   "",
 		Terminal:    pkg.Terminal,
 	}
-	return RequestWithBodyParam(pkg.GetActivityListAction, pkg.GetList, "GET", s)
+	return RequestWithBodyParam(pkg.GetActivityListAction, pkg.B, "GET", s)
 }

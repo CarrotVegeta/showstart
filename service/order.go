@@ -35,7 +35,7 @@ func GetCoreOrderResult(orderJobKey, stFlpv string) map[string]interface{} {
 		TrackPath:   "",
 		Terminal:    pkg.Terminal,
 	}
-	return RequestWithBodyParam(pkg.GetCoreOrderResultAction, pkg.CoreOrderResult, "POST", gc)
+	return RequestWithBodyParam(pkg.GetCoreOrderResultAction, pkg.E, "POST", gc)
 }
 func Order(oc *OrderConfig, pa *PersonAddress) map[string]interface{} {
 	geo := &models.GenerateOrder{}

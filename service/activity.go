@@ -13,5 +13,5 @@ func GetActivityDetail(activityID string) map[string]interface{} {
 	g.StFlpv = config.Conf.StFlpv
 	g.TrackPath = ""
 	g.Terminal = pkg.Terminal
-	return RequestWithBodyParam(pkg.GetActivityDetailsAction, pkg.Detail, "POST", g)
+	return RequestWithBodyParam(pkg.GetActivityDetailsAction, pkg.A, "POST", g)
 }

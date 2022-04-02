@@ -93,3 +93,14 @@ type CoreOrderResult struct {
 	TrackPath   string `json:"trackPath"`
 	Terminal    string `json:"terminal"`
 }
+type LoginParam struct {
+	AreaCode   string `json:"areaCode"`
+	Phone      string `json:"phone"`
+	VerifyCode string `json:"verifyCode"`
+	StFlpv     string `json:"st_flpv"`
+	FormToken  string `json:"formToken"`
+	Captcha    string `json:"captcha"`
+	Sign       string `json:"sign"`
+	TrackPath  string `json:"trackPath"`
+	Terminal   string `json:"terminal"`
+}

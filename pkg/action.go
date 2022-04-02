@@ -7,4 +7,5 @@ const (
 	GetActivityListAction    = "/wap/activity/list"
 	GetSpectatorAction       = "/wap/cp/list"
 	GetCoreOrderResultAction = "/order/getCoreOrderResult"
+	WapUserLogin             = "/wap/user/login"
 )

@@ -17,6 +17,7 @@ type Ticket struct {
 	TicketNum    int
 	ActivityId   int
 	MemberNum    int
+	RemainTicket int
 }
 
 func (t *Ticket) Request() {
