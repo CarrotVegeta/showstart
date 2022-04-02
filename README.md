@@ -50,4 +50,7 @@ mode: order
 - ticketId<票价id> 从查看指定演出票价获取
 
 - commonPerformerID[观演人ID] 从观演人列表获取
-  getRemainTicket
+
+5、查询剩余是否有票数
+
+mode: getRemainTicket
