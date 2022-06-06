@@ -1,6 +1,7 @@
 showstart:
   #从header里面获取该字段
-#  StFlpv:
+  CUUSEREF:
+  StFlpv:
   CUSUT:
   #用户信息
   ## 收货地址
@@ -16,13 +17,14 @@ showstart:
   #分页展示 页数
   Pagno: 1
   #演出相关信息
-  ActivityId: 173072
-  TicketId: 4b2fb858d872bc9b2edd064aab401463
+  ActivityId: 175865
+  TicketId: f542fc4311e2cae04916efbf46111268
   #一个订单抢几张票 默认1张
   TicketNum: 1
   #指定多少毫米内随机抢票
-  Ticker: 2000
+  Ticker: 200
   #cron表达式 指定时间开始抢票
-  CronTime: 0 12 12 * * ?
+  #如果注释时间就是马上开抢
+#  CronTime: 0 03 21 * * ?
   #订单数
   OrderNum: 1

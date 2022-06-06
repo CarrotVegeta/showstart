@@ -55,27 +55,12 @@ func (o *Order) Request() {
 		CityName:     config.Conf.CityName,
 		Address:      config.Conf.Address,
 	}
-	c := cron.New()
-	err := c.AddFunc(config.Conf.CronTime, func() {
-		log.Println("开始抢票========================》")
-		var flag bool
-		for {
-			//if !flag {
-			//	time.Sleep(time.Millisecond * time.Duration(2000))
-			//}
-			if flag {
-				i := rand.Intn(int(config.Conf.Ticker))
-				time.Sleep(time.Millisecond * (time.Duration(i)))
-			}
-			flag = true
-			o.GoOrder(oc, pa)
-		}
-	})
-	if err != nil {
-		log.Fatal(err.Error())
-		return
+	if config.Conf.CronTime == "" {
+		o.OrderNow(oc, pa)
+	} else {
+		o.Order(oc, pa)
 	}
-	c.Start()
+
 	var j int
 	for {
 		select {
@@ -86,7 +71,42 @@ func (o *Order) Request() {
 			break
 		}
 	}
-
+}
+func (o *Order) Order(oc *service.OrderConfig, pa *service.PersonAddress) {
+	c := cron.New()
+	err := c.AddFunc(config.Conf.CronTime, func() {
+		log.Println("开始抢票========================》")
+		var flag bool
+		for {
+			if flag {
+				i := rand.Intn(int(config.Conf.Ticker))
+				time.Sleep(time.Millisecond * (time.Duration(i)))
+			} else {
+				time.Sleep(time.Millisecond * 100)
+			}
+			flag = true
+			o.GoOrder(oc, pa)
+		}
+	})
+	if err != nil {
+		log.Fatal(err.Error())
+		return
+	}
+	c.Start()
+}
+func (o *Order) OrderNow(oc *service.OrderConfig, pa *service.PersonAddress) {
+	log.Println("开始抢票========================》")
+	var flag bool
+	for {
+		if flag {
+			i := rand.Intn(int(config.Conf.Ticker))
+			time.Sleep(time.Millisecond * (time.Duration(i)))
+		} else {
+			time.Sleep(time.Millisecond * 100)
+		}
+		flag = true
+		o.GoOrder(oc, pa)
+	}
 }
 func (o *Order) GoOrder(oc *service.OrderConfig, pa *service.PersonAddress) {
 	res := service.Order(oc, pa)
