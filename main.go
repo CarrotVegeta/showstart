@@ -1,18 +1,10 @@
 package main
 
 import (
-	"github.com/CarrotVegeta/showstart/engine"
-	"github.com/CarrotVegeta/showstart/mod"
+	"github.com/CarrotVegeta/showstart/server"
 )
 
 func main() {
-	s := engine.NewEngine()
-	s.RegisterServer(&mod.ActivityList{})
-	s.RegisterServer(&mod.ActivityDetail{})
-	s.RegisterServer(&mod.Spectator{})
-	s.RegisterServer(&mod.Order{})
-	s.RegisterServer(&mod.Ticket{})
-	s.RegisterServer(&mod.TicketRemain{})
-	s.RegisterServer(&mod.User{})
-	s.Start()
+
+	server.NewServer()
 }

@@ -7,6 +7,7 @@ import (
 )
 
 type Config struct {
+	Port              int    `yaml:"Port"`
 	CUUSEREF          string `yaml:"CUUSEREF"`
 	StFlpv            string `yaml:"StFlpv"`
 	CUSUT             string `yaml:"CUSUT"`
