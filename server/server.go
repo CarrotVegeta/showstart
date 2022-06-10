@@ -3,33 +3,35 @@ package server
 import (
 	"fmt"
 	"github.com/CarrotVegeta/showstart/config"
-	"github.com/CarrotVegeta/showstart/server/router"
+	"github.com/CarrotVegeta/showstart/logger"
 	"github.com/gin-gonic/gin"
 )
-
-func init() {
-	config.Init("./config/config.yaml")
-}
 
 type GinServer interface {
 	RegisterRouter(e *gin.Engine)
 }
 type Server struct {
-	engine   *gin.Engine
-	services []*GinServer
+	engine *gin.Engine
 }
 
-func (s *Server) RegisterRouter() {
-
-}
-func (s *Server) RegisterService() {
-	s.services = append(s.services, &router.Activity{})
+func (s *Server) RegisterRouter(g GinServer) {
+	g.RegisterRouter(s.engine)
 }
 func (s *Server) Start() {
-	s.engine.Run(fmt.Sprintf("0.0.0.0:%d", config.Conf.Port))
+	logger.FileLog.Info("server start 0.0.0.0:%d", config.Conf.Server.Port)
+	err := s.engine.Run(fmt.Sprintf("0.0.0.0:%d", config.Conf.Server.Port))
+	if err != nil {
+		logger.FileLog.Error(err.Error())
+		return
+	}
 }
-func NewServer() {
+
+func NewServer() *Server {
 	s := &Server{}
 	s.engine = gin.Default()
-	s.Start()
+	err := s.engine.SetTrustedProxies([]string{"127.0.0.1"})
+	if err != nil {
+		panic(err.Error())
+	}
+	return s
 }

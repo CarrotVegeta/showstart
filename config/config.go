@@ -7,7 +7,11 @@ import (
 )
 
 type Config struct {
-	Port              int    `yaml:"Port"`
+	Server    *Server    `yaml:"server"`
+	ShowStart *ShowStart `yaml:"showstart"`
+	Logger    *Logger    `yaml:"logger"`
+}
+type ShowStart struct {
 	CUUSEREF          string `yaml:"CUUSEREF"`
 	StFlpv            string `yaml:"StFlpv"`
 	CUSUT             string `yaml:"CUSUT"`
@@ -26,20 +30,32 @@ type Config struct {
 	TicketNum         int    `yaml:"TicketNum"`
 	OrderNum          int    `yaml:"OrderNum"`
 }
+type Server struct {
+	Port int `yaml:"port"`
+}
+type Logger struct {
+	InfoFp   string `yaml:"info_fp"`
+	ErrorFn  string `yaml:"error_fn"`
+	LogLevel string `yaml:"log_level"`
+}
 
-var Conf Config
+func NewLogger() *Logger {
+	return &Logger{}
+}
 
+var Conf *Config
+
+func NewConfig() *Config {
+	return &Config{}
+}
 func Init(path string) {
 	f, err := ioutil.ReadFile(path)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	type ss struct {
-		ShowStart Config `yaml:"showstart"`
-	}
-	s := &ss{}
-	if err := yaml.Unmarshal(f, &s); err != nil {
+	c := NewConfig()
+	if err := yaml.Unmarshal(f, &c); err != nil {
 		log.Fatalf("yaml 解析错误:%v", err)
 	}
-	Conf = s.ShowStart
+	Conf = c
 }

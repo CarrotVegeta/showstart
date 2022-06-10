@@ -2,6 +2,7 @@ package service
 
 import (
 	"encoding/base64"
+	"fmt"
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/CarrotVegeta/showstart/pkg"
 	"github.com/CarrotVegeta/showstart/request"
@@ -11,7 +12,7 @@ import (
 	"time"
 )
 
-func RequestWithBodyParam(action, url string, method string, query interface{}) map[string]interface{} {
+func RequestWithBodyParam(action, url string, method string, query interface{}) (map[string]interface{}, error) {
 	p := &models.Param{
 		Action: action,
 		Method: method,
@@ -29,9 +30,9 @@ func RequestWithBodyParam(action, url string, method string, query interface{}) 
 	bp := GetBodyParam(d, string(bs))
 	rm, err := request.HttpDo(url, bp)
 	if err != nil {
-		log.Fatal(err.Error())
+		return nil, fmt.Errorf("发起post请求错误:%v", err.Error())
 	}
-	return rm
+	return rm, nil
 }
 
 func GetBodyParam(d, s string) *models.BodyParam {

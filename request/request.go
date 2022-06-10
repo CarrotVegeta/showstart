@@ -23,8 +23,8 @@ func HttpDo(url string, param interface{}) (map[string]interface{}, error) {
 	req.Header.Set("HOST", pkg.HOST)
 	req.Header.Set("Content-Type", "application/json")
 	//todo
-	req.Header.Set("CUUSERREF", config.Conf.CUUSEREF)
-	req.Header.Set("CUSUT", config.Conf.CUSUT)
+	req.Header.Set("CUUSERREF", config.Conf.ShowStart.CUUSEREF)
+	req.Header.Set("CUSUT", config.Conf.ShowStart.CUSUT)
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Println(err.Error())

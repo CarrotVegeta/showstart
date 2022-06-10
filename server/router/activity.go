@@ -1,10 +1,14 @@
 package router
 
-import "github.com/gin-gonic/gin"
+import (
+	. "github.com/CarrotVegeta/showstart/controller"
+	"github.com/CarrotVegeta/showstart/server"
+	"github.com/gin-gonic/gin"
+)
 
 type Activity struct {
 }
 
 func (a *Activity) RegisterRouter(e *gin.Engine) {
-	e.POST("/")
+	e.POST("/activity/detail", server.Handler()(GetActivityDetail))
 }
