@@ -2,8 +2,8 @@ package request
 
 import (
 	"bufio"
-	"github.com/CarrotVegeta/showstart/config"
 	"github.com/CarrotVegeta/showstart/pkg"
+	"github.com/CarrotVegeta/showstart/server"
 	jsoniter "github.com/json-iterator/go"
 	"io/ioutil"
 	"log"
@@ -23,8 +23,8 @@ func HttpDo(url string, param interface{}) (map[string]interface{}, error) {
 	req.Header.Set("HOST", pkg.HOST)
 	req.Header.Set("Content-Type", "application/json")
 	//todo
-	req.Header.Set("CUUSERREF", config.Conf.ShowStart.CUUSEREF)
-	req.Header.Set("CUSUT", config.Conf.ShowStart.CUSUT)
+	req.Header.Set("CUUSERREF", server.User.CUUSERREF)
+	req.Header.Set("CUSUT", server.User.CUSUT)
 	resp, err := client.Do(req)
 	if err != nil {
 		log.Println(err.Error())

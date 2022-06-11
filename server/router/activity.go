@@ -11,4 +11,5 @@ type Activity struct {
 
 func (a *Activity) RegisterRouter(e *gin.Engine) {
 	e.POST("/activity/detail", server.Handler()(GetActivityDetail))
+	e.POST("/activity/list", server.Handler()(GetActivityList))
 }

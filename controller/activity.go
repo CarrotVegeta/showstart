@@ -8,6 +8,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+func GetActivityList(c *gin.Context) (reply *server.Reply) {
+	reply = server.NewReply()
+	activity := models.NewActivity()
+	err := c.ShouldBindJSON(activity)
+	if err != nil {
+		reply.Error = err.Error()
+		logger.FileLog.Error(err.Error())
+		return
+	}
+	if activity.KeyWord == "" {
+		reply.Error = "key_word is null"
+		return
+	}
+	if activity.PagNo == 0 {
+		activity.PagNo = 10
+	}
+	service.Search(activity.KeyWord, activity.PagNo, reply)
+	return
+}
 func GetActivityDetail(c *gin.Context) (reply *server.Reply) {
 	reply = server.NewReply()
 	activity := models.NewActivity()
@@ -18,7 +37,7 @@ func GetActivityDetail(c *gin.Context) (reply *server.Reply) {
 		return
 	}
 	if activity.ActivityID == "" {
-		reply.Error = "activity is null"
+		reply.Error = "activity_id is null"
 		return
 	}
 	service.GetActivityDetail(activity.ActivityID, reply)

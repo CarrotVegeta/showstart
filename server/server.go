@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/CarrotVegeta/showstart/config"
 	"github.com/CarrotVegeta/showstart/logger"
+	"github.com/CarrotVegeta/showstart/models"
 	"github.com/gin-gonic/gin"
 )
 
@@ -29,9 +30,33 @@ func (s *Server) Start() {
 func NewServer() *Server {
 	s := &Server{}
 	s.engine = gin.Default()
+	s.engine.Use(HandlerMiddleWare()(SetUserInfo))
 	err := s.engine.SetTrustedProxies([]string{"127.0.0.1"})
 	if err != nil {
 		panic(err.Error())
 	}
 	return s
+}
+
+var User *models.User
+
+func SetUserInfo(c *gin.Context) (reply *Reply) {
+	reply = NewReply()
+	User = models.NewUser()
+	User.CUUSERREF = c.GetHeader("Cuuserref")
+	if User.CUUSERREF == "" {
+		reply.Error = "cuuseref is null"
+		return
+	}
+	User.StFlpv = c.GetHeader("St_flpv")
+	if User.StFlpv == "" {
+		reply.Error = "st_flpv is null"
+		return
+	}
+	User.CUSUT = c.GetHeader("Cusut")
+	if User.CUSUT == "" {
+		reply.Error = "cusut is null"
+		return
+	}
+	return
 }

@@ -1,7 +1,6 @@
 package service
 
 import (
-	"github.com/CarrotVegeta/showstart/config"
 	"github.com/CarrotVegeta/showstart/logger"
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/CarrotVegeta/showstart/pkg"
@@ -12,10 +11,38 @@ func GetActivityDetail(activityID string, reply *server.Reply) {
 	g := &models.GetActivityDetails{}
 	g.ActivityId = activityID
 	g.Coupon = ""
-	g.StFlpv = config.Conf.ShowStart.StFlpv
+	g.StFlpv = server.User.StFlpv
 	g.TrackPath = ""
 	g.Terminal = pkg.Terminal
 	result, err := RequestWithBodyParam(pkg.GetActivityDetailsAction, pkg.A, "POST", g)
+	if err != nil {
+		reply.Error = err.Error()
+		logger.FileLog.Error(err.Error())
+		return
+	}
+	reply.Data = result
+}
+
+func Search(keyword string, pageNo int, reply *server.Reply) {
+	s := &models.RequestSearch{
+		PageNo:      pageNo,
+		CityCode:    "28",
+		Keyword:     keyword,
+		Style:       "",
+		ActivityIds: "",
+		CouponCode:  "",
+		PerformerId: "",
+		HosterId:    "",
+		SiteId:      "",
+		Tag:         "",
+		TourId:      "",
+		ThemeId:     "",
+		StFlpv:      server.User.StFlpv,
+		Sign:        "",
+		TrackPath:   "",
+		Terminal:    pkg.Terminal,
+	}
+	result, err := RequestWithBodyParam(pkg.GetActivityListAction, pkg.B, "GET", s)
 	if err != nil {
 		reply.Error = err.Error()
 		logger.FileLog.Error(err.Error())

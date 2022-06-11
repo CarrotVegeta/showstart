@@ -12,9 +12,9 @@ type Config struct {
 	Logger    *Logger    `yaml:"logger"`
 }
 type ShowStart struct {
-	CUUSEREF          string `yaml:"CUUSEREF"`
-	StFlpv            string `yaml:"StFlpv"`
-	CUSUT             string `yaml:"CUSUT"`
+	//CUUSEREF          string `yaml:"CUUSEREF"`
+	//StFlpv            string `yaml:"StFlpv"`
+	//CUSUT             string `yaml:"CUSUT"`
 	CustomerName      string `yaml:"CustomerName"`
 	Province          string `yaml:"Province"`
 	CityName          string `yaml:"CityName"`
