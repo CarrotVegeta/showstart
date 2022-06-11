@@ -12,5 +12,7 @@ func main() {
 	logger.Init()
 	s := server.NewServer()
 	s.RegisterRouter(&router.Activity{})
+	s.RegisterRouter(&router.Ticket{})
+	s.RegisterRouter(&router.OrderServer{})
 	s.Start()
 }
