@@ -6,6 +6,7 @@ import (
 	"github.com/CarrotVegeta/showstart/logger"
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 type GinServer interface {
@@ -30,6 +31,7 @@ func (s *Server) Start() {
 func NewServer() *Server {
 	s := &Server{}
 	s.engine = gin.Default()
+	s.engine.Use(CorsMiddleware())
 	s.engine.Use(HandlerMiddleWare()(SetUserInfo))
 	err := s.engine.SetTrustedProxies([]string{"127.0.0.1"})
 	if err != nil {
@@ -59,4 +61,25 @@ func SetUserInfo(c *gin.Context) (reply *Reply) {
 		return
 	}
 	return
+}
+
+//CorsMiddleware 处理跨域请求,支持options访问
+func CorsMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		method := c.Request.Method
+
+		c.Header("Access-Control-Allow-Origin", "*")
+		c.Header("Access-Control-Allow-Headers", "Content-Type,AccessToken,X-CSRF-Token, Authorization, Token,Cuuserref,St_flpv,Cusut")
+		c.Header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+		c.Header("Access-Control-Expose-Headers", "Content-Length, Access-Control-Allow-Origin, Access-Control-Allow-Headers, Content-Type")
+
+		c.Header("Access-Control-Allow-Credentials", "true")
+
+		//放行所有OPTIONS方法
+		if method == "OPTIONS" {
+			c.AbortWithStatus(http.StatusNoContent)
+		}
+		// 处理请求
+		c.Next()
+	}
 }
