@@ -10,6 +10,17 @@ type Config struct {
 	Server    *Server    `yaml:"server"`
 	ShowStart *ShowStart `yaml:"showstart"`
 	Logger    *Logger    `yaml:"logger"`
+	Mysql
+}
+type Mysql struct {
+	Server          string `yaml:"server"`
+	Port            string `yaml:"port"`
+	Name            string `yaml:"name"`
+	UserName        string `yaml:"username"`
+	Password        string `yaml:"password"`
+	MaxIdleConns    int    `yaml:"max_idle_conns"`
+	MaxOpenConns    int    `yaml:"max_open_conns"`
+	ConnMaxLifetime int    `yaml:"conn_max_lifetime"`
 }
 type ShowStart struct {
 	//CUUSEREF          string `yaml:"CUUSEREF"`

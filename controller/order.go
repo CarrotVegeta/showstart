@@ -79,7 +79,6 @@ func Order(c *gin.Context) (reply *server.Reply) {
 			return
 		}
 	}
-
 	var j int
 	for {
 		select {

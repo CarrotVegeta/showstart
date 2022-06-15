@@ -32,3 +32,12 @@ logger:
   log_level: ERROR
 server:
   port: 9000
+mysql:
+  name: showstart
+  server: 127.0.0.1
+  port: 3306
+  username: root
+  password: 123456
+  max_idle_conns: 10
+  max_open_conns: 200
+  conn_max_lifetime: 0
