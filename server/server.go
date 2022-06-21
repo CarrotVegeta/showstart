@@ -2,6 +2,7 @@ package server
 
 import (
 	"fmt"
+	"github.com/CarrotVegeta/showstart/common/storage"
 	"github.com/CarrotVegeta/showstart/config"
 	"github.com/CarrotVegeta/showstart/logger"
 	"github.com/CarrotVegeta/showstart/models"
@@ -28,6 +29,20 @@ func (s *Server) Start() {
 	}
 }
 
+var DB interface{}
+
+func init() {
+	config.Init("./config/config.yaml")
+	logger.Init()
+	InitDB()
+}
+func InitDB() {
+	s, err := storage.CreateStorage("mysql")
+	if err != nil {
+		panic(err.Error())
+	}
+	DB = s.DB()
+}
 func NewServer() *Server {
 	s := &Server{}
 	s.engine = gin.Default()

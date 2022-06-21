@@ -14,7 +14,7 @@ type Config struct {
 }
 type Mysql struct {
 	Server          string `yaml:"server"`
-	Port            string `yaml:"port"`
+	Port            int    `yaml:"port"`
 	Name            string `yaml:"name"`
 	UserName        string `yaml:"username"`
 	Password        string `yaml:"password"`
