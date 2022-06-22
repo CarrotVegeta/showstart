@@ -2,6 +2,7 @@ package request
 
 import (
 	"bufio"
+	"github.com/CarrotVegeta/showstart/logger"
 	"github.com/CarrotVegeta/showstart/pkg"
 	"github.com/CarrotVegeta/showstart/server"
 	jsoniter "github.com/json-iterator/go"
@@ -36,6 +37,7 @@ func HttpDo(url string, param interface{}) (map[string]interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
+	logger.FileLog.Info(string(body))
 	m := make(map[string]interface{})
 	jsoniter.Unmarshal(body, &m)
 	if _, ok := m["state"]; !ok {

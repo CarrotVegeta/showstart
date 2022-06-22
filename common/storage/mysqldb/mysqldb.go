@@ -15,6 +15,7 @@ type MysqlDB struct {
 	cfg *Config
 }
 type Config struct {
+	UserName     string
 	DatabaseName string
 	Server       string
 	Port         int
@@ -28,7 +29,9 @@ func (mydb *MysqlDB) DB() interface{} {
 	return mydb.db
 }
 func (mydb *MysqlDB) DSN() string {
-	return fmt.Sprintf("gorm:gorm@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local",
+	return fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local",
+		mydb.cfg.UserName,
+		mydb.cfg.Password,
 		mydb.cfg.Server,
 		mydb.cfg.Port,
 		mydb.cfg.DatabaseName)
@@ -36,6 +39,7 @@ func (mydb *MysqlDB) DSN() string {
 func (mydb *MysqlDB) Open(conf *config.Config) error {
 	mysqlConf := conf.Mysql
 	mydb.cfg = &Config{
+		UserName:     mysqlConf.UserName,
 		DatabaseName: mysqlConf.Name,
 		Server:       mysqlConf.Server,
 		Port:         mysqlConf.Port,

@@ -20,6 +20,11 @@ var (
 )
 var ch = make(chan bool)
 var cherr = make(chan error)
+var (
+	j     int
+	err   error
+	start bool
+)
 
 func Order(c *gin.Context) (reply *server.Reply) {
 	reply = server.NewReply()
@@ -37,6 +42,19 @@ func Order(c *gin.Context) (reply *server.Reply) {
 		reply.Error = "ticket_id is null"
 		return
 	}
+	if start {
+		if err != nil {
+			reply.Error = err.Error()
+			return
+		}
+		if j == order.OrderNum {
+			reply.Data = "抢票成功"
+			return
+		}
+		reply.Data = "抢票中......"
+		return
+	}
+	start = true
 	tickets, err := service.GetTicketList(order.ActivityID, order.TicketID)
 	if err != nil {
 		reply.Error = err.Error()
@@ -69,32 +87,34 @@ func Order(c *gin.Context) (reply *server.Reply) {
 		CityName:     order.CityName,
 		Address:      order.Address,
 	}
-	if order.CronTime == "" {
-		orderNow(oc, pa, order)
-	} else {
-		err := cronOrder(oc, pa, order)
-		if err != nil {
-			reply.Error = err.Error()
-			logger.FileLog.Error(err.Error())
-			return
+	go func() {
+		if order.CronTime == "" {
+			orderNow(oc, pa, order)
+		} else {
+			err := cronOrder(oc, pa, order)
+			if err != nil {
+				reply.Error = err.Error()
+				logger.FileLog.Error(err.Error())
+				return
+			}
 		}
-	}
-	var j int
-	for {
-		select {
-		case <-ch:
-			j++
-		case err := <-cherr:
-			reply.Error = err.Error()
-			logger.FileLog.Error(err.Error())
-			close(cherr)
-			close(ch)
+		var j int
+		for {
+			select {
+			case <-ch:
+				j++
+			case err = <-cherr:
+				logger.FileLog.Error(err.Error())
+				close(cherr)
+				close(ch)
+			}
+			if j == order.OrderNum {
+				reply.Data = "抢票成功"
+				return
+			}
 		}
-		if j == order.OrderNum {
-			reply.Data = "抢票成功"
-			break
-		}
-	}
+	}()
+
 	return
 }
 

@@ -23,6 +23,9 @@ func GetTicketList(activityId int, ticketID string) ([]models.TicketModel, error
 	}
 	var tickets []models.TicketModel
 	if m != nil {
+		if _, ok := m["result"]; !ok {
+			return nil, fmt.Errorf("get ticket_list request error:%v", m["msg"].(string))
+		}
 		result := m["result"].([]interface{})
 		for _, r := range result {
 			v := r.(map[string]interface{})

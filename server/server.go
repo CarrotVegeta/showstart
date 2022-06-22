@@ -37,7 +37,7 @@ func init() {
 	InitDB()
 }
 func InitDB() {
-	s, err := storage.CreateStorage("mysql")
+	s, err := storage.CreateStorage("mysqldb")
 	if err != nil {
 		panic(err.Error())
 	}
