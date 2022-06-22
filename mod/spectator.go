@@ -33,7 +33,7 @@ func (s *Spectator) GetSpectator() *Spectator {
 			log.Fatal(err.Error())
 			return nil
 		}
-		user := fmt.Sprintf("id:%d 姓名:%s userId:%d", s.ID, s.Name, s.UserID)
+		user := fmt.Sprintf("id:%d 姓名:%s userId:%d", sp.ID, sp.Name, sp.UserID)
 		fmt.Println(user)
 		if s.UserID == sp.UserID {
 			return &sp
