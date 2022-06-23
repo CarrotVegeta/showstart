@@ -7,23 +7,11 @@ import (
 	"github.com/CarrotVegeta/showstart/server"
 	"github.com/CarrotVegeta/showstart/service"
 	"github.com/gin-gonic/gin"
-	"github.com/robfig/cron"
-	"log"
-	"math/rand"
 	"reflect"
-	"time"
 )
 
 var (
-	num    = 1
-	ticker = 500
-)
-var ch = make(chan bool)
-var cherr = make(chan error)
-var (
-	j     int
-	err   error
-	start bool
+	num = 1
 )
 
 func Order(c *gin.Context) (reply *server.Reply) {
@@ -42,42 +30,20 @@ func Order(c *gin.Context) (reply *server.Reply) {
 		reply.Error = "ticket_id is null"
 		return
 	}
-	if start {
-		if err != nil {
-			reply.Error = err.Error()
-			return
-		}
-		if j == order.OrderNum {
-			reply.Data = "抢票成功"
-			return
-		}
-		reply.Data = "抢票中......"
-		return
-	}
-	start = true
-	tickets, err := service.GetTicketList(order.ActivityID, order.TicketID)
-	if err != nil {
-		reply.Error = err.Error()
-		logger.FileLog.Error(err.Error())
-		return
-	}
 	if order.TicketNum > 0 {
 		num = order.TicketNum
 	}
-	if order.Ticker == 0 {
-		order.Ticker = int64(ticker)
-	}
-	t := tickets[0]
+
 	oc := &service.OrderConfig{
-		GoodsType:         t.GoodType,
-		SkuType:           t.Type,
+		GoodsType:         order.GoodsType,
+		SkuType:           order.SkuType,
 		Num:               fmt.Sprintf("%d", num),
-		GoodsId:           t.ActivityId,
-		SkuId:             t.TicketId,
-		Price:             t.SellingPrice,
+		GoodsId:           order.ActivityID,
+		SkuId:             order.TicketID,
+		Price:             order.SellingPrice,
 		CommonPerformerID: order.CommonPerformerID,
 		TelePhone:         order.Telephone,
-		SessionId:         t.SessionId,
+		SessionId:         order.SessionId,
 		StFlpv:            server.User.StFlpv,
 	}
 	pa := &service.PersonAddress{
@@ -87,95 +53,43 @@ func Order(c *gin.Context) (reply *server.Reply) {
 		CityName:     order.CityName,
 		Address:      order.Address,
 	}
-	go func() {
-		if order.CronTime == "" {
-			orderNow(oc, pa, order)
-		} else {
-			err := cronOrder(oc, pa, order)
-			if err != nil {
-				reply.Error = err.Error()
-				logger.FileLog.Error(err.Error())
-				return
-			}
-		}
-		var j int
-		for {
-			select {
-			case <-ch:
-				j++
-			case err = <-cherr:
-				logger.FileLog.Error(err.Error())
-				close(cherr)
-				close(ch)
-			}
-			if j == order.OrderNum {
-				reply.Data = "抢票成功"
-				return
-			}
-		}
-	}()
-
+	isSuccess, msg, err := goOrder(oc, pa)
+	if err != nil {
+		reply.Error = err.Error()
+		return
+	}
+	if !isSuccess {
+		reply.Data = msg
+		return
+	}
+	reply.Data = "抢票成功"
 	return
 }
 
-func cronOrder(oc *service.OrderConfig, pa *service.PersonAddress, o models.OrderModel) error {
-	c := cron.New()
-	err := c.AddFunc(o.CronTime, func() {
-		log.Println("开始抢票========================》")
-		var flag bool
-		for {
-			if flag {
-				i := rand.Intn(int(o.Ticker))
-				time.Sleep(time.Millisecond * (time.Duration(i)))
-			} else {
-				time.Sleep(time.Millisecond * 100)
-			}
-			flag = true
-			goOrder(oc, pa)
-		}
-	})
+func goOrder(oc *service.OrderConfig, pa *service.PersonAddress) (bool, string, error) {
+	resOrder, err := service.Order(oc, pa)
 	if err != nil {
-		return fmt.Errorf("start cron err :%v", err.Error())
+		return false, "", fmt.Errorf("goorder error :%v", err.Error())
 	}
-	c.Start()
-	return nil
-}
-func orderNow(oc *service.OrderConfig, pa *service.PersonAddress, o models.OrderModel) {
-	log.Println("开始抢票========================》")
-	var flag bool
-	for {
-		if flag {
-			i := rand.Intn(int(o.Ticker))
-			time.Sleep(time.Millisecond * (time.Duration(i)))
-		} else {
-			time.Sleep(time.Millisecond * 100)
-		}
-		flag = true
-		goOrder(oc, pa)
+	if _, ok := resOrder["success"]; !ok || !resOrder["success"].(bool) {
+		return false, resOrder["msg"].(string), nil
 	}
-}
-func goOrder(oc *service.OrderConfig, pa *service.PersonAddress) {
-	res, err := service.Order(oc, pa)
+	result := resOrder["result"].(map[string]interface{})
+	orderJobKey := result["orderJobKey"].(string)
+	resp, err := service.GetCoreOrderResult(orderJobKey)
 	if err != nil {
-		cherr <- err
+		return false, "", fmt.Errorf("get core order result error:%v", err.Error())
 	}
-	if res["success"].(bool) == true {
-		result := res["result"].(map[string]interface{})
-		orderJobKey := result["orderJobKey"].(string)
-		res1, err := service.GetCoreOrderResult(orderJobKey)
-		if err != nil {
-			cherr <- err
-		}
-		if res1["success"].(bool) == true {
-			if _, ok := res1["result"]; ok {
-				if reflect.TypeOf(res1["result"]).Kind() == reflect.Map {
-					result1 := res1["result"].(map[string]interface{})
-					if result1["orderId"].(string) != "" {
-						fmt.Println("===================抢票成功=================================")
-						ch <- true
-					}
-				}
+	if _, ok := resp["success"]; !ok || !resp["success"].(bool) {
+		return false, resp["msg"].(string), nil
+	}
+	if _, ok := resp["result"]; ok {
+		if reflect.TypeOf(resp["result"]).Kind() == reflect.Map {
+			result1 := resp["result"].(map[string]interface{})
+			if result1["orderId"].(string) != "" {
+				return true, "", nil
 			}
 		}
 	}
+	return true, "", nil
 }

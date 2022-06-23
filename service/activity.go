@@ -5,11 +5,12 @@ import (
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/CarrotVegeta/showstart/pkg"
 	"github.com/CarrotVegeta/showstart/server"
+	"strconv"
 )
 
-func GetActivityDetail(activityID string, reply *server.Reply) {
+func GetActivityDetail(activityID int, reply *server.Reply) {
 	g := &models.GetActivityDetails{}
-	g.ActivityId = activityID
+	g.ActivityId = strconv.Itoa(activityID)
 	g.Coupon = ""
 	g.StFlpv = server.User.StFlpv
 	g.TrackPath = ""

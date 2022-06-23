@@ -36,8 +36,8 @@ func GetActivityDetail(c *gin.Context) (reply *server.Reply) {
 		logger.FileLog.Error(err.Error())
 		return
 	}
-	if activity.ActivityID == "" {
-		reply.Error = "activity_id is null"
+	if activity.ActivityID == 0 {
+		reply.Error = "activity_id is 0"
 		return
 	}
 	service.GetActivityDetail(activity.ActivityID, reply)

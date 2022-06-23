@@ -9,10 +9,11 @@ type Order struct {
 	ProvinceName      string `json:"province_name"`
 	CityName          string `json:"city_name"`
 	Address           string `json:"address"`
-	CronTime          string `json:"cron_time"`
-	OrderNum          int    `json:"order_num"`
 	TicketNum         int    `json:"ticket_num"`
-	Ticker            int64  `json:"ticker"`
+	GoodsType         int    `json:"goods_type"`
+	SkuType           int    `json:"sku_type"`
+	SellingPrice      string `json:"selling_price"`
+	SessionId         int    `json:"session_id"`
 }
 type OrderModel *Order
 
