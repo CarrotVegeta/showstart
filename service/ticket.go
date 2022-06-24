@@ -17,7 +17,7 @@ func GetTicketList(activityId int, ticketID string) ([]models.TicketModel, error
 		TrackPath:  "",
 		Terminal:   pkg.Terminal,
 	}
-	m, err := RequestWithBodyParam(pkg.GetTicketListAction, pkg.A, "POST", t)
+	m, err := RequestWithBodyParam(pkg.GetTicketListAction, pkg.HW, "POST", t)
 	if err != nil {
 		return nil, fmt.Errorf("getticketlist request err:%v", err.Error())
 	}
@@ -42,6 +42,7 @@ func GetTicketList(activityId int, ticketID string) ([]models.TicketModel, error
 				ticket.TicketType = tm["ticketType"].(string)
 				ticket.ShowTime = tm["showTime"].(string)
 				ticket.TicketId = tm["ticketId"].(string)
+				ticket.RemainTicket = (int)(tm["remainTicket"].(float64))
 				if ticketID != "" && ticketID == ticket.TicketId {
 					tickets = append(tickets, ticket)
 					break

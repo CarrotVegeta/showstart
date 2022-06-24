@@ -36,7 +36,7 @@ func GetCoreOrderResult(orderJobKey string) (map[string]interface{}, error) {
 		TrackPath:   "",
 		Terminal:    pkg.Terminal,
 	}
-	return RequestWithBodyParam(pkg.GetCoreOrderResultAction, pkg.E, "POST", gc)
+	return RequestWithBodyParam(pkg.GetCoreOrderResultAction, pkg.APPNJ, "POST", gc)
 }
 func Order(oc *OrderConfig, pa *PersonAddress) (map[string]interface{}, error) {
 	geo := &models.GenerateOrder{}
@@ -62,5 +62,5 @@ func Order(oc *OrderConfig, pa *PersonAddress) (map[string]interface{}, error) {
 	geo.TotalAmount = price
 	geo.StFlpv = oc.StFlpv
 	geo.Terminal = pkg.Terminal
-	return RequestWithBodyParam(pkg.OrderAction, pkg.GetOrderUrl(oc.SkuType), "POST", geo)
+	return RequestWithBodyParam(pkg.OrderAction, pkg.APPNJ, "POST", geo)
 }

@@ -9,10 +9,37 @@ import (
 	"github.com/CarrotVegeta/showstart/utils"
 	jsoniter "github.com/json-iterator/go"
 	"log"
+	"math"
 	"time"
 )
 
+const str = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+func generateIndexOfChar(userID int) string {
+	var n string
+	r := make(map[int]string)
+	i := make(map[string]int)
+	for t := 0; t < len(str); t++ {
+		n = string(str[t])
+		r[t] = n
+		i[n] = t
+	}
+	return encode(userID, r)
+}
+func encode(e int, n map[int]string) string {
+	if e == 0 {
+		return n[0]
+	}
+	var r string
+	i := len(str)
+	for e > 0 {
+		r = n[e%i] + r
+		e = int(math.Floor(float64(e / i)))
+	}
+	return r
+}
 func RequestWithBodyParam(action, url string, method string, query interface{}) (map[string]interface{}, error) {
+	url += utils.GenerateUrlApi(3876440, 175350, 0)
 	p := &models.Param{
 		Action: action,
 		Method: method,

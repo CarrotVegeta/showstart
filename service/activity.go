@@ -15,7 +15,7 @@ func GetActivityDetail(activityID int, reply *server.Reply) {
 	g.StFlpv = server.User.StFlpv
 	g.TrackPath = ""
 	g.Terminal = pkg.Terminal
-	result, err := RequestWithBodyParam(pkg.GetActivityDetailsAction, pkg.A, "POST", g)
+	result, err := RequestWithBodyParam(pkg.GetActivityDetailsAction, pkg.HW, "POST", g)
 	if err != nil {
 		reply.Error = err.Error()
 		logger.FileLog.Error(err.Error())
@@ -43,7 +43,7 @@ func Search(keyword string, pageNo int, reply *server.Reply) {
 		TrackPath:   "",
 		Terminal:    pkg.Terminal,
 	}
-	result, err := RequestWithBodyParam(pkg.GetActivityListAction, pkg.B, "GET", s)
+	result, err := RequestWithBodyParam(pkg.GetActivityListAction, pkg.HW, "GET", s)
 	if err != nil {
 		reply.Error = err.Error()
 		logger.FileLog.Error(err.Error())

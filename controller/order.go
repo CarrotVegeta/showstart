@@ -33,7 +33,6 @@ func Order(c *gin.Context) (reply *server.Reply) {
 	if order.TicketNum > 0 {
 		num = order.TicketNum
 	}
-
 	oc := &service.OrderConfig{
 		GoodsType:         order.GoodsType,
 		SkuType:           order.SkuType,
@@ -52,6 +51,16 @@ func Order(c *gin.Context) (reply *server.Reply) {
 		ProvinceName: order.ProvinceName,
 		CityName:     order.CityName,
 		Address:      order.Address,
+	}
+	tickets, err := service.GetTicketList(order.ActivityID, order.TicketID)
+	if err != nil {
+		reply.Error = err.Error()
+		return
+	}
+	ticket := tickets[0]
+	if ticket.RemainTicket <= 0 {
+		reply.Data = "库存不足,请稍后再试!"
+		return
 	}
 	isSuccess, msg, err := goOrder(oc, pa)
 	if err != nil {
@@ -87,6 +96,7 @@ func goOrder(oc *service.OrderConfig, pa *service.PersonAddress) (bool, string, 
 		if reflect.TypeOf(resp["result"]).Kind() == reflect.Map {
 			result1 := resp["result"].(map[string]interface{})
 			if result1["orderId"].(string) != "" {
+				logger.FileLog.Info("抢票成功")
 				return true, "", nil
 			}
 		}
