@@ -2,8 +2,8 @@ package logger
 
 import (
 	"fmt"
-	"github.com/CarrotVegeta/showstart/config"
-	"github.com/CarrotVegeta/showstart/utils"
+	"github.com/CarrotVegeta/showstart/conf"
+	"github.com/CarrotVegeta/showstart/pkg/utils"
 	"io"
 	"log"
 	"os"
@@ -24,16 +24,16 @@ type fileLogger struct {
 }
 
 func NewFileLogger() {
-	if config.Conf.Logger == nil {
-		config.Conf.Logger = config.NewLogger()
+	if conf.Conf.Logger == nil {
+		conf.Conf.Logger = conf.NewLogger()
 	}
-	logLevel, err := parseLogLevel(config.Conf.Logger.LogLevel)
+	logLevel, err := parseLogLevel(conf.Conf.Logger.LogLevel)
 	if err != nil {
 		log.Println(err)
 	}
 	f := &fileLogger{
-		infoFp:   config.Conf.Logger.InfoFp,
-		errorFp:  config.Conf.Logger.ErrorFn,
+		infoFp:   conf.Conf.Logger.InfoFp,
+		errorFp:  conf.Conf.Logger.ErrorFn,
 		logLevel: logLevel,
 	}
 	if f.infoFp == "" {

@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/CarrotVegeta/showstart/pkg"
-	"github.com/CarrotVegeta/showstart/request"
-	"github.com/CarrotVegeta/showstart/utils"
+	"github.com/CarrotVegeta/showstart/pkg/request"
+	utils2 "github.com/CarrotVegeta/showstart/pkg/utils"
 	jsoniter "github.com/json-iterator/go"
 	"log"
 	"math"
@@ -39,17 +39,17 @@ func encode(e int, n map[int]string) string {
 	return r
 }
 func RequestWithBodyParam(action, url string, method string, query interface{}) (map[string]interface{}, error) {
-	url += utils.GenerateUrlApi(3876440, 175350, 0)
+	url += utils2.GenerateUrlApi(3876440, 175350, 0)
 	p := &models.Param{
 		Action: action,
 		Method: method,
 		Query:  query,
 		Body:   nil,
 		Qtime:  time.Now().UnixNano() / 1e6,
-		Ranstr: utils.RandStr(8),
+		Ranstr: utils2.RandStr(8),
 	}
 	bs, _ := jsoniter.Marshal(p)
-	c, err := utils.AesECBEncrypt(bs, []byte(pkg.Secret))
+	c, err := utils2.AesECBEncrypt(bs, []byte(pkg.Secret))
 	if err != nil {
 		log.Fatal(err.Error())
 	}
@@ -69,6 +69,6 @@ func GetBodyParam(d, s string) *models.BodyParam {
 		Terminal: pkg.Terminal,
 		Version:  pkg.Version,
 	}
-	bp.Sign = utils.GeneMD5(s)
+	bp.Sign = utils2.GeneMD5(s)
 	return bp
 }

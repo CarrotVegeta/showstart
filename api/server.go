@@ -1,9 +1,9 @@
-package server
+package api
 
 import (
 	"fmt"
 	"github.com/CarrotVegeta/showstart/common/storage"
-	"github.com/CarrotVegeta/showstart/config"
+	"github.com/CarrotVegeta/showstart/conf"
 	"github.com/CarrotVegeta/showstart/logger"
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/gin-gonic/gin"
@@ -21,8 +21,8 @@ func (s *Server) RegisterRouter(g GinServer) {
 	g.RegisterRouter(s.engine)
 }
 func (s *Server) Start() {
-	logger.FileLog.Info("server start 0.0.0.0:%d", config.Conf.Server.Port)
-	err := s.engine.Run(fmt.Sprintf("0.0.0.0:%d", config.Conf.Server.Port))
+	logger.FileLog.Info("server start 0.0.0.0:%d", conf.Conf.Server.Port)
+	err := s.engine.Run(fmt.Sprintf("0.0.0.0:%d", conf.Conf.Server.Port))
 	if err != nil {
 		logger.FileLog.Error(err.Error())
 		return
@@ -32,7 +32,7 @@ func (s *Server) Start() {
 var DB interface{}
 
 func init() {
-	config.Init("./config/config.yaml")
+	conf.Init("./conf/conf.yaml")
 	logger.Init()
 	InitDB()
 }

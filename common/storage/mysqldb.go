@@ -1,8 +1,8 @@
-package mysqldb
+package storage
 
 import (
 	"fmt"
-	"github.com/CarrotVegeta/showstart/config"
+	"github.com/CarrotVegeta/showstart/conf"
 	"github.com/CarrotVegeta/showstart/logger"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -36,7 +36,7 @@ func (mydb *MysqlDB) DSN() string {
 		mydb.cfg.Port,
 		mydb.cfg.DatabaseName)
 }
-func (mydb *MysqlDB) Open(conf *config.Config) error {
+func (mydb *MysqlDB) Open(conf *conf.Config) error {
 	mysqlConf := conf.Mysql
 	mydb.cfg = &Config{
 		UserName:     mysqlConf.UserName,

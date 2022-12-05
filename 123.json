@@ -1,0 +1,21 @@
+{
+  "type": "object",
+  "data": {
+    "st_flpv": "961007ea504e70a7e5a902c5be803c3d",
+    "userId": 3876440,
+    "userType": 1,
+    "tuType": 0,
+    "userName": "少年锦时",
+    "avatar": "https://s2.showstart.com/icon_user_head_default_image.png",
+    "loginTime": 1656052322370,
+    "sign": "ce618bcfc4c46b74a68de4c70b322aed",
+    "ticketWalletServiceStatus": 2,
+    "tel": "13118115155",
+    "isChoose": 1,
+    "areaCode": "86_CN",
+    "uniqueCode": "1b356f7e1777940cf1df324530e544db",
+    "imAppId": 1400331755,
+    "isRealName": 2,
+    "memberExpireTime": 0
+  }
+}

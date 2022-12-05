@@ -11,14 +11,14 @@ showstart:
   Address: 详细地址
   Telephone:
   #如需观演人
-  CommonPerformerID:
+  CommonPerformerID: 1225930
   #搜索演出关键字
   Keyword: 陈鸿宇
   #分页展示 页数
   Pagno: 1
   #演出相关信息
-  ActivityId: 175865
-  TicketId: f542fc4311e2cae04916efbf46111268
+  ActivityId: 173072
+  TicketId: 278c9b12d2da42b8271cabfe4dde2e89
   #一个订单抢几张票 默认1张
   TicketNum: 1
   #指定多少毫米内随机抢票
@@ -29,7 +29,7 @@ showstart:
   #订单数
   OrderNum: 1
 logger:
-  log_level: ERROR
+  log_level: DEBUG
 server:
   port: 9000
 mysql:
@@ -37,7 +37,7 @@ mysql:
   server: 127.0.0.1
   port: 3306
   username: root
-  password: 123456
+  password:
   max_idle_conns: 10
   max_open_conns: 200
   conn_max_lifetime: 0

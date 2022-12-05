@@ -1,4 +1,4 @@
-package controller
+package service
 
 //
 //type Spectator struct {
@@ -33,4 +33,13 @@ package controller
 //		}
 //	}
 //	return nil
+//}
+//func GetSpectatorList() map[string]interface{} {
+//	s := &models.RequestSpectator{
+//		StFlpv:    conf.Conf.StFlpv,
+//		Sign:      "",
+//		TrackPath: "",
+//		Terminal:  pkg.Terminal,
+//	}
+//	return RequestWithBodyParam(pkg.GetSpectatorAction, pkg.B, "POST", s)
 //}
