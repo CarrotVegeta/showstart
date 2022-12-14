@@ -7,6 +7,7 @@ import (
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/CarrotVegeta/showstart/pkg"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"reflect"
 	"strconv"
 )
@@ -133,7 +134,7 @@ func GetCoreOrderResult(orderJobKey string) (map[string]interface{}, error) {
 		TrackPath:   "",
 		Terminal:    pkg.Terminal,
 	}
-	return RequestWithBodyParam(pkg.GetCoreOrderResultAction, pkg.APPNJ, "POST", gc)
+	return RequestWithBodyParam(pkg.GetCoreOrderResultAction, pkg.APPNJ, http.MethodPost, gc)
 }
 func Order(oc *OrderConfig, pa *PersonAddress) (map[string]interface{}, error) {
 	geo := &models.GenerateOrder{}
@@ -159,5 +160,5 @@ func Order(oc *OrderConfig, pa *PersonAddress) (map[string]interface{}, error) {
 	geo.TotalAmount = price
 	geo.StFlpv = oc.StFlpv
 	geo.Terminal = pkg.Terminal
-	return RequestWithBodyParam(pkg.OrderAction, pkg.APPNJ, "POST", geo)
+	return RequestWithBodyParam(pkg.OrderAction, pkg.APPNJ, http.MethodPost, geo)
 }

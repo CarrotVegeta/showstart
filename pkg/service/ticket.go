@@ -7,6 +7,7 @@ import (
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/CarrotVegeta/showstart/pkg"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strconv"
 )
 
@@ -66,7 +67,7 @@ func GetTicketList(activityId int, ticketID string) ([]models.TicketModel, error
 		TrackPath:  "",
 		Terminal:   pkg.Terminal,
 	}
-	m, err := RequestWithBodyParam(pkg.GetTicketListAction, pkg.HW, "POST", t)
+	m, err := RequestWithBodyParam(pkg.GetTicketListAction, pkg.HW, http.MethodPost, t)
 	if err != nil {
 		return nil, fmt.Errorf("getticketlist request err:%v", err.Error())
 	}

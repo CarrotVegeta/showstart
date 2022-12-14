@@ -6,6 +6,7 @@ import (
 	"github.com/CarrotVegeta/showstart/models"
 	"github.com/CarrotVegeta/showstart/pkg"
 	"github.com/gin-gonic/gin"
+	"net/http"
 	"strconv"
 )
 
@@ -52,7 +53,7 @@ func GetActivityDetail(activityID int, reply *api.Reply) {
 	g.StFlpv = api.User.StFlpv
 	g.TrackPath = ""
 	g.Terminal = pkg.Terminal
-	result, err := RequestWithBodyParam(pkg.GetActivityDetailsAction, pkg.HW, "POST", g)
+	result, err := RequestWithBodyParam(pkg.GetActivityDetailsAction, pkg.HW, http.MethodGet, g)
 	if err != nil {
 		reply.Error = err.Error()
 		logger.FileLog.Error(err.Error())
@@ -80,7 +81,7 @@ func Search(keyword string, pageNo int, reply *api.Reply) {
 		TrackPath:   "",
 		Terminal:    pkg.Terminal,
 	}
-	result, err := RequestWithBodyParam(pkg.GetActivityListAction, pkg.HW, "GET", s)
+	result, err := RequestWithBodyParam(pkg.GetActivityListAction, pkg.HW, http.MethodGet, s)
 	if err != nil {
 		reply.Error = err.Error()
 		logger.FileLog.Error(err.Error())
