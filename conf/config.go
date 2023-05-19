@@ -1,15 +1,17 @@
 package conf
 
 import (
+	"flag"
 	"gopkg.in/yaml.v2"
-	"io/ioutil"
 	"log"
+	"os"
 )
 
 type Config struct {
-	Server    *Server    `yaml:"server"`
-	ShowStart *ShowStart `yaml:"showstart"`
-	Logger    *Logger    `yaml:"logger"`
+	ConfigPath string     `yaml:"config_path" json:"config_path"`
+	Server     *Server    `yaml:"server"`
+	ShowStart  *ShowStart `yaml:"show_start"`
+	Logger     *Logger    `yaml:"logger"`
 	Mysql
 }
 type Mysql struct {
@@ -57,10 +59,14 @@ func NewLogger() *Logger {
 var Conf *Config
 
 func NewConfig() *Config {
-	return &Config{}
+	Conf = &Config{}
+	return Conf
 }
-func Init(path string) {
-	f, err := ioutil.ReadFile(path)
+func Init() {
+	NewConfig()
+	flag.StringVar(&Conf.ConfigPath, "c", "./conf/config.yaml", "config file path")
+	flag.Parse()
+	f, err := os.ReadFile(Conf.ConfigPath)
 	if err != nil {
 		log.Fatal(err.Error())
 	}

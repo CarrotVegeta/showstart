@@ -10,6 +10,6 @@ type Activity struct {
 }
 
 func (a *Activity) RegisterRouter(e *gin.Engine) {
-	e.POST("/activity/detail", api.Handler()(GetActivityDetailAPI))
-	e.POST("/activity/list", api.Handler()(GetActivityListAPI))
+	e.POST("/activity/detail", api.Handler(GetActivityDetailAPI))
+	e.POST("/activity/list", api.Handler(GetActivityListAPI))
 }

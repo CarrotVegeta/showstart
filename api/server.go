@@ -32,10 +32,11 @@ func (s *Server) Start() {
 var DB interface{}
 
 func init() {
-	conf.Init("./conf/conf.yaml")
+	conf.Init()
 	logger.Init()
-	InitDB()
+	//InitDB()
 }
+
 func InitDB() {
 	s, err := storage.CreateStorage("mysqldb")
 	if err != nil {
@@ -47,7 +48,7 @@ func NewServer() *Server {
 	s := &Server{}
 	s.engine = gin.Default()
 	s.engine.Use(CorsMiddleware())
-	s.engine.Use(HandlerMiddleWare()(SetUserInfo))
+	s.engine.Use(HandlerMiddleWare(SetUserInfo))
 	err := s.engine.SetTrustedProxies([]string{"127.0.0.1"})
 	if err != nil {
 		panic(err.Error())
@@ -78,7 +79,7 @@ func SetUserInfo(c *gin.Context) (reply *Reply) {
 	return
 }
 
-//CorsMiddleware 处理跨域请求,支持options访问
+// CorsMiddleware 处理跨域请求,支持options访问
 func CorsMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		method := c.Request.Method

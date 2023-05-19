@@ -7,22 +7,18 @@ import (
 
 type MyHandler func(c *gin.Context) (reply *Reply)
 
-func HandlerMiddleWare() func(h MyHandler) gin.HandlerFunc {
-	return func(h MyHandler) gin.HandlerFunc {
-		return func(context *gin.Context) {
-			reply := h(context)
-			if reply.Error != "" {
-				context.AbortWithStatusJSON(http.StatusOK, &reply)
-			}
+func HandlerMiddleWare(h MyHandler) gin.HandlerFunc {
+	return func(context *gin.Context) {
+		reply := h(context)
+		if reply.Error != "" {
+			context.AbortWithStatusJSON(http.StatusOK, &reply)
 		}
 	}
 }
-func Handler() func(h MyHandler) gin.HandlerFunc {
-	return func(h MyHandler) gin.HandlerFunc {
-		return func(context *gin.Context) {
-			reply := h(context)
-			context.AbortWithStatusJSON(http.StatusOK, &reply)
-		}
+func Handler(h MyHandler) gin.HandlerFunc {
+	return func(context *gin.Context) {
+		reply := h(context)
+		context.AbortWithStatusJSON(http.StatusOK, &reply)
 	}
 }
 

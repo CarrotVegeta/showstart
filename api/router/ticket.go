@@ -10,6 +10,6 @@ type Ticket struct {
 }
 
 func (a *Ticket) RegisterRouter(e *gin.Engine) {
-	e.POST("/tickets", api.Handler()(GetTicketListAPI))
-	e.POST("/ticket", api.Handler()(GetTicketAPI))
+	e.POST("/tickets", api.Handler(GetTicketListAPI))
+	e.POST("/ticket", api.Handler(GetTicketAPI))
 }

@@ -10,5 +10,5 @@ type OrderServer struct {
 }
 
 func (o *OrderServer) RegisterRouter(e *gin.Engine) {
-	e.POST("/order", api.Handler()(OrderAPI))
+	e.POST("/order", api.Handler(OrderAPI))
 }
