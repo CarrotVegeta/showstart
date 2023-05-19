@@ -31,7 +31,7 @@ showstart:
 logger:
   log_level: DEBUG
 server:
-  port: 9000
+  port: 8000
 mysql:
   name: showstart
   server: 127.0.0.1
