@@ -39,7 +39,6 @@ func encode(e int, n map[int]string) string {
 	return r
 }
 func RequestWithBodyParam(action, url string, method string, query interface{}) (map[string]interface{}, error) {
-	url += utils2.GenerateUrlApi(3876440, 175350, 0)
 	p := &models.Param{
 		Action: action,
 		Method: method,
