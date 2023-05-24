@@ -13,7 +13,9 @@ ENV TZ=Asia/Shanghai \
     DEBIAN_FRONTEND=noninteractive \
     GOGC=800
 WORKDIR /usr/local
-RUN apt install ca-certificates
+RUN apt-get update
+RUN apt-get upgrade
+RUN apt-get install ca-certificates
 RUN mkdir /usr/local/backend
 RUN mkdir /usr/local/backend/conf
 RUN mkdir /usr/local/backend/bin
