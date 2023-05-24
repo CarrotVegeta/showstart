@@ -3,6 +3,8 @@ FROM golang:latest AS build
 WORKDIR /usr/local/showstart
 COPY . /usr/local/showstart
 RUN mkdir bin
+RUN go env -w GOPROXY=https://goproxy.io,direct
+RUN go mod tidy
 RUN make build
 
 
