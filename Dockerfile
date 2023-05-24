@@ -13,14 +13,12 @@ ENV TZ=Asia/Shanghai \
     DEBIAN_FRONTEND=noninteractive \
     GOGC=800
 WORKDIR /usr/local
-RUN apt-get update
-RUN apt-get upgrade
-RUN apt-get install ca-certificates
 RUN mkdir /usr/local/backend
 RUN mkdir /usr/local/backend/conf
 RUN mkdir /usr/local/backend/bin
 COPY --from=build /usr/local/showstart/bin /usr/local/backend/bin/
 COPY --from=build /usr/local/showstart/conf/config.yaml /usr/local/backend/conf
+COPY --form=build /usr/local/showstart/resources/ca-certificates.crt /etc/ssl/certs
 WORKDIR /usr/local/backend/bin
 
 EXPOSE 8000
