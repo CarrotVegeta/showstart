@@ -18,7 +18,7 @@ RUN mkdir /usr/local/backend/conf
 RUN mkdir /usr/local/backend/bin
 COPY --from=build /usr/local/showstart/bin /usr/local/backend/bin/
 COPY --from=build /usr/local/showstart/conf/config.yaml /usr/local/backend/conf
-COPY --from=build /usr/local/showstart/resources/ca-certificates.crt /etc/ssl/certs
+COPY --from=build /usr/local/showstart/resources/ca-certificates.crt /etc/ssl/certs/
 WORKDIR /usr/local/backend/bin
 
 EXPOSE 8000
