@@ -12,7 +12,7 @@ func GenerateUrlApi(userID, eventID, apiID int) string {
 	P := "00" + generateIndexOfChar(apiID)
 	P = P[len(P)-2:]
 	e := P + A + i
-	return e
+	return "/" + e
 }
 func generateIndexOfChar(k int) string {
 	var n string

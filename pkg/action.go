@@ -13,6 +13,6 @@ const (
 )
 
 func GenerateUrl(u string, userID, eventID int) string {
-	u += utils2.GenerateUrlApi(3876440, 196660, 0)
+	u += utils2.GenerateUrlApi(userID, eventID, 0)
 	return u
 }

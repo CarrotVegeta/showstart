@@ -53,7 +53,7 @@ func GetActivityDetail(activityID int, reply *api.Reply) {
 	g.StFlpv = api.User.StFlpv
 	g.TrackPath = ""
 	g.Terminal = pkg.Terminal
-	result, err := RequestWithBodyParam(pkg.GenerateUrl(pkg.GetActivityDetailsAction, api.User.UserID, activityID), pkg.HW, http.MethodGet, g)
+	result, err := RequestWithBodyParam(pkg.GetActivityDetailsAction, pkg.HW, http.MethodGet, g)
 	if err != nil {
 		reply.Error = err.Error()
 		logger.FileLog.Error(err.Error())
