@@ -22,7 +22,7 @@ services:
     container_name: ${FRONT_SHOWSTART_NAME}
     restart: always
     privileged: true
-    image: front-showstart:latest
+    image: ${FRONT_SHOWSTART_NAME}:latest
     networks:
       - ${NETWORKS}
     ports:
