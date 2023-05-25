@@ -3,6 +3,8 @@ services:
     build:
       context: ${SHOWSTART_CODE_PATH}
       dockerfile: ${SHOWSTART_DOCKERFILE_PATH}
+      options:
+        rm: true
     container_name: ${SHOWSTART_NAME}
     restart: always
     privileged: true
@@ -15,6 +17,8 @@ services:
     build:
       context: ${FRONT_SHOWSTART_CODE_PATH}
       dockerfile: ${FRONT_SHOWSTART_DOCKERFILE_PATH}
+      options:
+        rm: true
     container_name: ${FRONT_SHOWSTART_NAME}
     restart: always
     privileged: true
