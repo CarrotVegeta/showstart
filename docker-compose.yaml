@@ -8,7 +8,7 @@ services:
     container_name: ${SHOWSTART_NAME}
     restart: always
     privileged: true
-    image: showstart:latest
+    image: ${SHOWSTART_NAME}:latest
     networks:
       - ${NETWORKS}
     ports:
