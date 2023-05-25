@@ -2,7 +2,7 @@ package router
 
 import (
 	"github.com/CarrotVegeta/showstart/api"
-	. "github.com/CarrotVegeta/showstart/pkg/service"
+	. "github.com/CarrotVegeta/showstart/internel/service"
 	"github.com/gin-gonic/gin"
 )
 
