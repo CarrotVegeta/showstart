@@ -5,8 +5,8 @@ build:*.go
 build_debug:*.go
 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64  go build -gcflags "all=-N -l" -o bin/$(SERVICE_NAME)
 image:
-	docker build  .
+	docker build --rm .
 local_image:
-	docker build -t showstart .
+	docker build --rm -t showstart .
 local_image_release:
-	docker build -t showstart .
+	docker build --rm -t showstart .

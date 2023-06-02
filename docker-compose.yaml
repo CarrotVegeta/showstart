@@ -6,9 +6,9 @@ services:
     container_name: ${SHOWSTART_NAME}
     restart: always
     privileged: true
-    image: showstart:latest
+    image: ${SHOWSTART_NAME}:latest
     networks:
-      - ${NETWORKS}
+      - showstart
     ports:
       - 8000:8000
   front-showstart:
@@ -18,9 +18,9 @@ services:
     container_name: ${FRONT_SHOWSTART_NAME}
     restart: always
     privileged: true
-    image: front-showstart:latest
+    image: ${FRONT_SHOWSTART_NAME}:latest
     networks:
-      - ${NETWORKS}
+      - showstart
     ports:
       - 80:8100
     volumes:
