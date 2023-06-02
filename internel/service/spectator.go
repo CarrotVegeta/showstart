@@ -10,9 +10,9 @@ import (
 )
 
 type Spectator struct {
-	ID     int
-	Name   string
-	UserID int
+	ID                 int    `json:"id"`
+	Name               string `json:"name"`
+	ShowDocumentNumber string `json:"showDocumentNumber"`
 }
 
 func GetSpectators(c *gin.Context, reply *api.Reply) {
@@ -24,7 +24,7 @@ func GetSpectators(c *gin.Context, reply *api.Reply) {
 	}
 	result := res["result"].([]interface{})
 	bs, _ := jsoniter.Marshal(result)
-	var sps Spectator
+	var sps []Spectator
 	err = jsoniter.Unmarshal(bs, &sps)
 	if err != nil {
 		logger.FileLog.Error(err.Error())

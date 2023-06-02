@@ -10,5 +10,6 @@ func main() {
 	s.RegisterRouter(&router.Activity{})
 	s.RegisterRouter(&router.Ticket{})
 	s.RegisterRouter(&router.OrderServer{})
+	s.RegisterRouter(&router.SpectatorServer{})
 	s.Start()
 }
