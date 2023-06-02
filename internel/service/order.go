@@ -16,8 +16,7 @@ var (
 	num = 1
 )
 
-func OrderAPI(c *gin.Context) (reply *api.Reply) {
-	reply = api.NewReply()
+func OrderAPI(c *gin.Context, reply *api.Reply) {
 	order := models.NewOrder()
 	if err := c.ShouldBindJSON(order); err != nil {
 		reply.Error = err.Error()

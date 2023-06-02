@@ -11,8 +11,7 @@ import (
 	"strconv"
 )
 
-func GetTicketListAPI(c *gin.Context) (reply *api.Reply) {
-	reply = api.NewReply()
+func GetTicketListAPI(c *gin.Context, reply *api.Reply) {
 	ticket := models.NewTicket()
 	if err := c.ShouldBindJSON(ticket); err != nil {
 		reply.Error = err.Error()
@@ -32,8 +31,7 @@ func GetTicketListAPI(c *gin.Context) (reply *api.Reply) {
 	reply.Data = tickets
 	return
 }
-func GetTicketAPI(c *gin.Context) (reply *api.Reply) {
-	reply = api.NewReply()
+func GetTicketAPI(c *gin.Context, reply *api.Reply) {
 	ticket := models.NewTicket()
 	if err := c.ShouldBindJSON(ticket); err != nil {
 		reply.Error = err.Error()

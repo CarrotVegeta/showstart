@@ -5,11 +5,12 @@ import (
 	"net/http"
 )
 
-type MyHandler func(c *gin.Context) (reply *Reply)
+type MyHandler func(c *gin.Context, reply *Reply)
 
 func HandlerMiddleWare(h MyHandler) gin.HandlerFunc {
 	return func(context *gin.Context) {
-		reply := h(context)
+		reply := &Reply{}
+		h(context, reply)
 		if reply.Error != "" {
 			context.AbortWithStatusJSON(http.StatusOK, &reply)
 		}
@@ -17,7 +18,8 @@ func HandlerMiddleWare(h MyHandler) gin.HandlerFunc {
 }
 func Handler(h MyHandler) gin.HandlerFunc {
 	return func(context *gin.Context) {
-		reply := h(context)
+		reply := &Reply{}
+		h(context, reply)
 		context.AbortWithStatusJSON(http.StatusOK, &reply)
 	}
 }

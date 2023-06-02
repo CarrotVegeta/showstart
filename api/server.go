@@ -58,8 +58,7 @@ func NewServer() *Server {
 
 var User *models.User
 
-func SetUserInfo(c *gin.Context) (reply *Reply) {
-	reply = NewReply()
+func SetUserInfo(c *gin.Context, reply *Reply) {
 	User = models.NewUser()
 	User.CUUSERREF = c.GetHeader("Cuuserref")
 	if User.CUUSERREF == "" {

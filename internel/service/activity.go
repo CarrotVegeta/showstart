@@ -10,8 +10,7 @@ import (
 	"strconv"
 )
 
-func GetActivityListAPI(c *gin.Context) (reply *api.Reply) {
-	reply = api.NewReply()
+func GetActivityListAPI(c *gin.Context, reply *api.Reply) {
 	activity := models.NewActivity()
 	err := c.ShouldBindJSON(activity)
 	if err != nil {
@@ -29,8 +28,7 @@ func GetActivityListAPI(c *gin.Context) (reply *api.Reply) {
 	Search(activity.KeyWord, activity.PagNo, reply)
 	return
 }
-func GetActivityDetailAPI(c *gin.Context) (reply *api.Reply) {
-	reply = api.NewReply()
+func GetActivityDetailAPI(c *gin.Context, reply *api.Reply) {
 	activity := models.NewActivity()
 	err := c.ShouldBindJSON(activity)
 	if err != nil {
